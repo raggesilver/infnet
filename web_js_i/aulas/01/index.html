@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <title>Aula 01</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./script.js"></script>
+  </head>
+  <body class="flex flex-col p-8 bg-orange-50">
+    <form
+      id="age-form"
+      onsubmit="onAgeFormSubmitted(event)"
+      class="flex flex-col gap-2 border rounded-lg mx-auto p-4 w-full max-w-[400px] bg-orange-100"
+    >
+      <h1 class="text-4xl lg:text-5xl font-bold">Aula 01</h1>
+      <label for="name-input">Nome</label>
+      <input
+        id="name-input"
+        name="name"
+        type="text"
+        class="border p-1 rounded bg-inherit border-orange-200"
+        required
+        placeholder="Ex. Leandro"
+      />
+      <label for="yob-input">Ano de nascimento</label>
+      <input
+        id="yob-input"
+        name="yob"
+        type="number"
+        class="border p-1 rounded bg-inherit border-orange-200"
+        required
+        placeholder="Ex. 1999"
+        min="1900"
+      />
+
+      <span id="message"></span>
+
+      <button type="submit" class="bg-black text-white px-4 py-2 rounded">
+        Submit
+      </button>
+    </form>
+  </body>
+</html>
