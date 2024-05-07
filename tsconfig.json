@@ -27,5 +27,5 @@
     "noPropertyAccessFromIndexSignature": false
   },
   "include": ["**/*.js", "**/*.ts", "**/*.tsx"],
-  "exclude": ["dist"]
+  "exclude": ["**/dist"]
 }
