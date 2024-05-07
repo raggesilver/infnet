@@ -24,6 +24,7 @@ jobs:
         name: Install dependencies
         run: |
           bun install
+          bun run --cwd packages/not-jquery build
       - id: setup-node
         name: Setup Node.js
         uses: actions/setup-node@v4
