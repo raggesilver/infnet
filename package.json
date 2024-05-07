@@ -2,7 +2,8 @@
   "$schema": "https://json.schemastore.org/package.json",
   "type": "module",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "web_js_i/aulas/04_calculate_experiment"
   ],
   "scripts": {
     "prepare": "husky",

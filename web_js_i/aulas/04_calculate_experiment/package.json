@@ -1,0 +1,21 @@
+{
+  "name": "04_calculate_salary_vite",
+  "version": "0.0.0",
+  "devDependencies": {
+    "@unocss/reset": "^0.59.4",
+    "@unocss/transformer-directives": "^0.59.4",
+    "typescript": "^5.4.5",
+    "unocss": "^0.59.4",
+    "vite": "^5.2.11"
+  },
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "type": "module",
+  "dependencies": {
+    "@raggesilver/not-jquery": "^0.0.4"
+  }
+}
