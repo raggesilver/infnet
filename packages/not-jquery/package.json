@@ -30,13 +30,11 @@
   "author": "Paulo Queiroz <pvaqueiroz@gmail.com>",
   "devDependencies": {
     "@happy-dom/global-registrator": "^14.10.1",
-    "@types/bun": "^1.0.0",
+    "@types/bun": "^1.1.1",
     "bun-plugin-dts": "^0.2.1",
     "happy-dom": "^14.10.1",
-    "typescript": "^5.2.2",
-    "vite": "^5.2.11"
-  },
-  "dependencies": {
+    "typescript": "^5.4.5",
+    "vite": "^5.2.11",
     "vite-plugin-dts": "^3.9.1"
   }
 }
