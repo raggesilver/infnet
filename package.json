@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "type": "module",
+  "scripts": {
+    "prepare": "husky",
+    "lint": "eslint"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.2.0",
+    "@types/bun": "latest",
+    "eslint": "^9.2.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "globals": "^15.1.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.8.0"
+  },
+  "lint-staged": {
+    "*.{js,ts,html,css,tsx,jsx}": "eslint --fix",
+    "*": "prettier --write --ignore-unknown"
+  }
+}

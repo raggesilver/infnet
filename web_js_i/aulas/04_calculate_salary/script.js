@@ -50,7 +50,7 @@ function calculateSalary(data) {
 /**
  * @param {HTMLFormElement} form
  */
-function onFormSubmit(form) {
+export function onFormSubmit(form) {
   const formData = new FormData(form);
   /**
    * @type {SalaryData}

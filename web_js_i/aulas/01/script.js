@@ -2,9 +2,9 @@ const thisYear = new Date().getFullYear();
 
 window.onload = () => {
   document.querySelector("#yob-input")?.setAttribute("max", thisYear);
-}
+};
 
-function onAgeFormSubmitted(e) {
+export function onAgeFormSubmitted(e) {
   e.preventDefault();
 
   const data = new FormData(e.target);
