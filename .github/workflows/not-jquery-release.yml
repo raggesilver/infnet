@@ -34,3 +34,4 @@ jobs:
         with:
           token: ${{ secrets.NPM_TOKEN }}
           access: public
+          package: packages/not-jquery/package.json
