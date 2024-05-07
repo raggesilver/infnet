@@ -36,4 +36,4 @@ jobs:
       - id: test
         name: Run test
         run: |
-          bun test
+          bun test --cwd packages/not-jquery
