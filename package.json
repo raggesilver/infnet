@@ -1,6 +1,9 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "prepare": "husky",
     "lint": "eslint",

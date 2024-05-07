@@ -1,0 +1,33 @@
+{
+  "name": "not-jquery",
+  "version": "0.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "description": "",
+  "scripts": {
+    "build": "bun run build.ts",
+    "prepublishOnly": "bun run build",
+    "test": "bun test"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "bun"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/raggesilver/infnet",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raggesilver/infnet.git"
+  },
+  "bugs": "https://github.com/raggesilver/infnet/issues",
+  "author": "Paulo Queiroz <pvaqueiroz@gmail.com>",
+  "devDependencies": {
+    "@happy-dom/global-registrator": "^14.10.1",
+    "@types/bun": "^1.0.0",
+    "bun-plugin-dts": "^0.2.1",
+    "happy-dom": "^14.10.1",
+    "typescript": "^5.2.2"
+  }
+}
