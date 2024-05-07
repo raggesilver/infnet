@@ -3,11 +3,13 @@
   "type": "module",
   "scripts": {
     "prepare": "husky",
-    "lint": "eslint"
+    "lint": "eslint",
+    "type-check": "bun --bun tsc --noEmit"
   },
   "devDependencies": {
     "@eslint/js": "^9.2.0",
     "@types/bun": "latest",
+    "@types/eslint__js": "^8.42.3",
     "eslint": "^9.2.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",

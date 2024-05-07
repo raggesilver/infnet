@@ -19,6 +19,7 @@ function calculateAdditional(age) {
 
 /**
  * @typedef {{
+ *    name: string;
  *    baseSalary: number;
  *    bonus: number;
  *    gratification: number;
@@ -52,11 +53,8 @@ function calculateSalary(data) {
  */
 export function onFormSubmit(form) {
   const formData = new FormData(form);
-  /**
-   * @type {SalaryData}
-   */
   const data = Array.from(formData.entries()).reduce((obj, entry) => {
-    const [key, value] = entry;
+    const [key, value] = [entry[0], entry[1].toString()];
     switch (key) {
       case "baseSalary":
       case "bonus":
@@ -72,7 +70,7 @@ export function onFormSubmit(form) {
         break;
     }
     return obj;
-  }, {});
+  }, /** @type {SalaryData} */ ({}));
 
   const salary = calculateSalary(data);
   const formattedSalary = new Intl.NumberFormat("pt-BR", {
