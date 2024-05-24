@@ -1,0 +1,28 @@
+name: Programming Club CI
+
+on:
+  workflow_dispatch: {}
+  push:
+    paths:
+      - ".github/workflows/programming_club.yml"
+      - "programming_club/**/*.c"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - id: checkout
+        name: Checkout
+        uses: actions/checkout@v3
+      - id: setup-gcc
+        name: Set up GCC
+        uses: egor-tensin/setup-gcc@v1
+        with:
+          version: latest
+          platform: x64
+      # TODO: use https://github.com/marketplace/actions/changed-files to
+      # only check changed files
+      - id: test
+        name: Run test
+        run: |
+          find programming_club/homework -type f -name '*.c' -exec gcc -o /dev/null -Wall -Werror -Wextra -std=c99 -O2 {} \; -exec echo {} OK \;
