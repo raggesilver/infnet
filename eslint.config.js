@@ -14,6 +14,7 @@ export default [
       "**/dist/**/*",
       "**/build/**/*",
       "**/node_modules/**/*",
+      "**/.venv/**/*",
     ],
   },
 ];
