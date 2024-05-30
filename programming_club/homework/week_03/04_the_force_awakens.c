@@ -7,7 +7,7 @@
 #define BUF_SIZE 4194304
 
 // https://judge.beecrowd.com/pt/runs/code/39977228
-// gcc-14 -o out 03_naming_roads.c -std=c99 -Wall -Werror -Wextra -O2
+// gcc-14 -o out 04_the_force_awakens.c -std=c99 -Wall -Werror -Wextra -O2
 
 void buf_seek_and_readjust(char *buf, char *ptr, size_t *new_length) {
   // If ptr is not NULL and not the beginning of the buffer
@@ -66,6 +66,5 @@ after_loop:
   }
 
   free(buf);
-
   return 0;
 }
