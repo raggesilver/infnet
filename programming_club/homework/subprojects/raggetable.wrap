@@ -1,0 +1,7 @@
+[wrap-git]
+url = https://github.com/raggesilver/raggetable.git
+revision = main
+depth = 1
+
+[provide]
+raggetable = dep_raggetable
