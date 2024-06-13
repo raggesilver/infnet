@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Block</title>
+  </head>
+  <body>
+    <script>
+      let done = false;
+      const wait = (time) =>
+        new Promise((resolve) => setTimeout(resolve, time));
+
+      wait(4000).then(() => {
+        done = true;
+      });
+
+      // while (!done) {}
+      console.log("Done");
+    </script>
+
+    <p>I am text</p>
+  </body>
+</html>

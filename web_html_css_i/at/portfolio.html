@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portfólio | Paulo Queiroz</title>
+    <link href="style.css" rel="stylesheet" />
+    <script src="components.js"></script>
+  </head>
+  <body>
+    <div class="container site-wrapper">
+      <header-bar></header-bar>
+      <!-- outer grid -->
+      <main class="bg-section flex flex-col p-4">
+        <table>
+          <thead>
+            <tr>
+              <th>Screenshot</th>
+              <th>Projeto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <img
+                  src="images/tasks.app.webp"
+                  alt="Screenshot Tasks.app
+                  aberto em um navegador"
+                />
+              </td>
+              <td>
+                <p>
+                  <b>Tasks.app</b> — Tasks.app é um aplicativo web, em
+                  desenvolvimento, que tem como objetivo servir como uma
+                  alternativa ao Trello. Esse projeto está sendo desenvolvido
+                  como projeto extracurricular para a disciplina de JavaScript
+                  no Infnet. Confira o app funcionando
+                  <a href="https://tasksapp.fly.dev" target="_blank">aqui</a> ou
+                  inspecione o código no
+                  <a
+                    href="https://github.com/raggesilver/tasks.app"
+                    target="_blank"
+                    >GitHub</a
+                  >.
+                </p>
+
+                <p>
+                  Esse projeto foi desenvolvido em TypeScript, utilizando as
+                  seguintes tecnologias: Nuxt.js, Drizzle ORM, Uno.css e Docker.
+                </p>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <img src="images/blackbox.webp" alt="Screenshot do BlackBox" />
+              </td>
+              <td>
+                <p>
+                  <b>BlackBox</b> — Um emulador de terminal para o GNOME
+                  Desktop. Esse foi o primeiro projeto que eu publiquei ao mundo
+                  e hoje conta com mais de <b>170 mil instalações!</b> Confira o
+                  projeto no
+                  <a
+                    href="https://gitlab.gnome.org/raggesilver/blackbox"
+                    target="_blank"
+                    >GitLab</a
+                  >.
+                </p>
+                <p>
+                  Esse projeto foi nas linguagens C e Vala. Conta também com
+                  estilizações em CSS.
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </main>
+      <site-footer></site-footer>
+    </div>
+
+    <style>
+      p {
+        margin-bottom: 1rem;
+      }
+    </style>
+  </body>
+</html>
