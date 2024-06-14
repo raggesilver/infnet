@@ -5,11 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Home | Paulo Queiroz</title>
     <link href="style.css" rel="stylesheet" />
-    <script src="components.js"></script>
   </head>
   <body>
     <div class="container site-wrapper">
-      <header-bar></header-bar>
+      <header>
+        <img
+          src="images/profile-picture-2.webp"
+          alt="Selfie minha usando um oculos de sol redondo"
+          title="Minha atual foto de perfil"
+        />
+        <h1>Paulo Queiroz</h1>
+        <nav>
+          <ul>
+            <li><a href="index.html">Página inicial</a></li>
+            <li><a href="#about">Sobre</a></li>
+            <li><a href="portfolio.html">Portfólio</a></li>
+            <li><a href="#contact">Contato</a></li>
+          </ul>
+        </nav>
+      </header>
       <!-- outer grid -->
       <main class="bg-section grid grid-cols-3 bg-section">
         <div class="flex flex-col gap-4 grid-colspan-2 p-4">
@@ -126,7 +140,7 @@
           </button>
         </aside>
       </main>
-      <site-footer></site-footer>
+      <footer>Copyright@Paulo Queiroz — Bora Programar</footer>
     </div>
   </body>
 </html>

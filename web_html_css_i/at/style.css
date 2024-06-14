@@ -88,6 +88,76 @@ ul {
   background-color: var(--section-background);
 }
 
+.p-with-margins p {
+  margin-bottom: 1rem;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  padding: 1rem 1.5rem;
+
+  gap: 2rem;
+
+  background: var(--section-background);
+
+  & img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+  }
+
+  & h1 {
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    font-weight: 900;
+  }
+
+  & nav {
+    margin-left: auto;
+  }
+
+  & ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 3rem;
+  }
+
+  & a {
+    text-decoration: none;
+    color: black;
+    background: white;
+    padding: 0rem 1rem;
+    border-radius: 2rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+footer {
+  background: var(--section-background);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 1rem;
+
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
 /** As classes a seguir são utilitárias, baseadas no Tailwindcss. */
 
 .bg-background {
