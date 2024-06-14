@@ -14,14 +14,15 @@
       <main class="bg-section grid grid-cols-3 bg-section">
         <div class="flex flex-col gap-4 grid-colspan-2 p-4">
           <!-- main cover -->
-          <div class="grid grid-cols-2 gap-4">
+          <section class="grid grid-cols-2 gap-4">
             <img
               src="images/profile-picture.webp"
-              alt="Selfie"
-              style="object-fit: cover; width: 100%; height: 150px"
+              alt="Selfie minha usando um oculos de sol redondo"
+              title="Minha atual foto favorita"
+              class="object-cover w-full h-[200px]"
             />
             <div class="flex flex-col gap-2">
-              <p class="font-bold">Sobre mim</p>
+              <h2 class="font-bold m-0">Sobre mim</h2>
               <p>
                 Meu nome é Paulo Queiroz, tenho 24 anos e sou apaixonado por
                 programação. Com quatro anos de experiência em desenvolvimento
@@ -34,27 +35,31 @@
                 passar tempo com a minha esposa.
               </p>
             </div>
-          </div>
+          </section>
 
           <!-- thumbnails -->
           <div class="grid grid-cols-4 gap-4 p-4 bg-background">
             <div class="flex flex-col gap-2">
               <img
-                src="images/profile-picture.webp"
-                alt="Selfie"
+                src="images/graduation.webp"
+                alt="Fotografia distante de uma graduação"
+                title="Joshua Hoehne, 2022, Unsplash"
                 class="object-cover aspect-2/1"
               />
               <p class="font-bold">Formação Acadêmica</p>
               <ul>
-                <li>Cursando Engenharia de Software, Infnet</li>
-                <li>Software Engineering, 42 Silicon Valley</li>
-                <li>Manutenção e suporte em Informática, IFTM</li>
+                <li>
+                  Cursando Engenharia de Software, Infnet, 2024 — Presente
+                </li>
+                <li>Software Engineering, 42 Silicon Valley, 2018 — 2019</li>
+                <li>Manutenção e suporte em Informática, IFTM, 2014 — 2017</li>
               </ul>
             </div>
             <div class="flex flex-col gap-2">
               <img
-                src="images/profile-picture.webp"
-                alt="Selfie"
+                src="images/library.webp"
+                alt="Fotografia de uma biblioteca cheia de livros"
+                title="Janko Ferlič, 2016, Unsplash"
                 class="object-cover aspect-2/1"
               />
               <p class="font-bold">Conhecimento</p>
@@ -68,8 +73,9 @@
             </div>
             <div class="flex flex-col gap-2">
               <img
-                src="images/profile-picture.webp"
-                alt="Selfie"
+                src="images/office.webp"
+                alt="Fotografia de um escritório moderno e vazio"
+                title="Nastuh Abootalebi, 2017, Unsplash"
                 class="object-cover aspect-2/1"
               />
               <p class="font-bold">Experiência</p>
@@ -86,22 +92,28 @@
             </div>
             <div class="flex flex-col gap-2">
               <img
-                src="images/profile-picture.webp"
-                alt="Selfie"
+                src="images/directions.webp"
+                alt="Fotografia de um poste com placas apontando para várias
+                cidades do mundo em diferentes direções"
+                title="Mick Haupt, 2021, Unsplash"
                 class="object-cover aspect-2/1"
               />
-              <p class="font-bold">Línguas</p>
+              <p class="font-bold">Idiomas</p>
               <p>Sou fluente em Português e Inglês.</p>
             </div>
           </div>
         </div>
 
-        <!-- ad -->
-        <div class="flex flex-col gap-2 m-4 ml-0 p-4 bg-background text-center">
-          <p class="font-bold">Desenvolver Projeto</p>
+        <!-- ad. a tag "aside" tangencia o conteúdo do pai, main, nesse caso. -->
+        <aside
+          class="flex flex-col gap-2 m-4 ml-0 p-4 bg-background text-center"
+        >
+          <h2 class="font-bold m-0">Desenvolver Projeto</h2>
           <img
-            src="images/profile-picture.webp"
-            alt="Selfie"
+            src="images/ad.webp"
+            alt="Fotografia de uma pessoa esquematizando um projeto em um bloco
+            de papel"
+            title="Kelly Sikkema, 2020, Unsplash"
             class="object-cover aspect-2/1"
           />
           <p>
@@ -112,7 +124,7 @@
           <button class="uppercase mx-auto p-2 bg-foreground text-background">
             FAÇA UM ORÇAMENTO
           </button>
-        </div>
+        </aside>
       </main>
       <site-footer></site-footer>
     </div>

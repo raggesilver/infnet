@@ -186,6 +186,14 @@ ul {
   margin-left: 0;
 }
 
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
+.m-0 {
+  margin: 0;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -197,6 +205,10 @@ ul {
 
 .text-right {
   text-align: right;
+}
+
+.text-justify {
+  text-align: justify;
 }
 
 .font-bold {
@@ -213,4 +225,16 @@ ul {
 
 .uppercase {
   text-transform: uppercase;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-\[150px\] {
+  height: 150px;
+}
+
+.h-\[200px\] {
+  height: 200px;
 }
