@@ -160,6 +160,24 @@ footer {
 
 /** As classes a seguir são utilitárias, baseadas no Tailwindcss. */
 
+/**
+ * Elementos marcados com essa classe não ficarão visíveis na tela, mas
+ * ainda serão acessíveis para leitores de tela. Isso é útil para textos
+ * que não são necessários visualmente, mas são importantes para a
+ * acessibilidade.
+ */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 .bg-background {
   background-color: var(--background);
 }
