@@ -17,10 +17,16 @@
         <h1>Paulo Queiroz</h1>
         <nav>
           <ul>
-            <li><a href="index.html">Página inicial</a></li>
-            <li><a href="#about">Sobre</a></li>
-            <li><a href="portfolio.html">Portfólio</a></li>
-            <li><a href="#contact">Contato</a></li>
+            <li>
+              <a href="index.html" title="Ir para a página inicial"
+                >Página inicial</a
+              >
+            </li>
+            <li><a href="#about" title="Ir para sobre">Sobre</a></li>
+            <li>
+              <a href="portfolio.html" title="Ir para o portfólio">Portfólio</a>
+            </li>
+            <li><a href="#contact" title="Ir para o contato">Contato</a></li>
           </ul>
         </nav>
       </header>
@@ -124,19 +130,31 @@
           class="flex flex-col gap-2 m-4 ml-0 p-4 bg-background text-center"
         >
           <h2 class="font-bold m-0">Desenvolver Projeto</h2>
-          <img
-            src="images/ad.webp"
-            alt="Fotografia de uma pessoa esquematizando um projeto em um bloco
+          <div class="position-relative">
+            <img
+              src="images/ad.webp"
+              alt="Fotografia de uma pessoa esquematizando um projeto em um bloco
             de papel"
-            title="Kelly Sikkema, 2020, Unsplash"
-            class="object-cover aspect-2/1"
-          />
+              title="Kelly Sikkema, 2020, Unsplash"
+              class="object-cover aspect-2/1"
+            />
+            <span
+              aria-hidden="true"
+              class="position-absolute w-2 h-2 rounded-full bg-primary -top-1 -left-1 animation-ping"
+            ></span>
+            <span
+              aria-hidden="true"
+              class="position-absolute w-2 h-2 rounded-full bg-primary -top-1 -left-1"
+            ></span>
+          </div>
           <p>
             Precisa de um projeto customizado para o seu negócio? Tenho
             experiência em produto, design, desenvolvimento e entrega. Posso
             desenvolver uma solução de ponta a ponta para você.
           </p>
-          <button class="uppercase mx-auto p-2 bg-foreground text-background">
+          <button
+            class="uppercase mx-auto p-2 bg-foreground text-background border border-foreground"
+          >
             FAÇA UM ORÇAMENTO
           </button>
         </aside>

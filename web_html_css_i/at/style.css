@@ -186,6 +186,10 @@ footer {
   background-color: var(--foreground);
 }
 
+.bg-primary {
+  background-color: var(--primary);
+}
+
 .text-foreground {
   color: var(--foreground);
 }
@@ -325,4 +329,69 @@ footer {
 
 .h-\[200px\] {
   height: 200px;
+}
+
+.border {
+  border-width: 1px;
+  border-style: solid;
+}
+
+.border-foreground {
+  border-color: var(--foreground);
+}
+
+.position-relative {
+  position: relative;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.-top-1 {
+  top: -0.25rem;
+}
+
+.-top-2 {
+  top: -0.5rem;
+}
+
+.-left-1 {
+  left: -0.25rem;
+}
+
+.-left-2 {
+  left: -0.5rem;
+}
+
+.w-2 {
+  width: 0.5rem;
+}
+
+.w-4 {
+  width: 1rem;
+}
+
+.h-2 {
+  height: 0.5rem;
+}
+
+.h-4 {
+  height: 1rem;
+}
+
+.rounded-full {
+  border-radius: 9999px;
+}
+
+.animation-ping {
+  animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
 }
