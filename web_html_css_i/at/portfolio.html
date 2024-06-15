@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portfólio | Paulo Queiroz</title>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container site-wrapper p-with-margins">
+      <header>
+        <img
+          src="images/profile-picture-2.webp"
+          alt="Selfie minha usando um oculos de sol redondo"
+          title="Minha atual foto de perfil"
+        />
+        <h1>Paulo Queiroz</h1>
+        <nav>
+          <ul>
+            <li>
+              <a href="index.html" title="Ir para a página inicial"
+                >Página inicial</a
+              >
+            </li>
+            <li><a href="#about" title="Ir para sobre">Sobre</a></li>
+            <li>
+              <a href="portfolio.html" title="Ir para o portfólio">Portfólio</a>
+            </li>
+            <li><a href="#contact" title="Ir para o contato">Contato</a></li>
+          </ul>
+        </nav>
+      </header>
+      <!-- outer grid -->
+      <main class="bg-section flex flex-col p-4">
+        <h2 class="text-center mb-8">Portfólio</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Screenshot</th>
+              <th>Projeto</th>
+            </tr>
+          </thead>
+          <tbody class="text-justify">
+            <tr>
+              <td>
+                <img
+                  src="images/tasks.app.webp"
+                  alt="Screenshot Tasks.app
+                  aberto em um navegador"
+                />
+              </td>
+              <td>
+                <p>
+                  <b>Tasks.app</b> — Tasks.app é um aplicativo web, em
+                  desenvolvimento, que tem como objetivo servir como uma
+                  alternativa ao Trello. Esse projeto está sendo desenvolvido
+                  como projeto extracurricular para a disciplina de JavaScript
+                  no Infnet. Confira o app funcionando
+                  <a
+                    href="https://tasksapp.fly.dev"
+                    target="_blank"
+                    title="Ir
+                    para o side do Tasks.app"
+                    >aqui</a
+                  >
+                  ou inspecione o código no
+                  <a
+                    href="https://github.com/raggesilver/tasks.app"
+                    target="_blank"
+                    title="Ir para o repositório do Tasks.app"
+                    >GitHub</a
+                  >.
+                </p>
+
+                <p>
+                  Esse projeto foi desenvolvido em TypeScript, utilizando as
+                  seguintes tecnologias: Nuxt.js, Drizzle ORM, Uno.css e Docker.
+                </p>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <img src="images/blackbox.webp" alt="Screenshot do BlackBox" />
+              </td>
+              <td>
+                <p>
+                  <b>BlackBox</b> — Um emulador de terminal para o GNOME
+                  Desktop. Esse foi o primeiro projeto que eu publiquei ao mundo
+                  e hoje conta com mais de <b>170 mil downloads!</b> Confira o
+                  projeto no
+                  <a
+                    href="https://gitlab.gnome.org/raggesilver/blackbox"
+                    target="_blank"
+                    title="Ir para o repositório do BlackBox"
+                    >GitLab</a
+                  >.
+                </p>
+                <p>
+                  Esse projeto foi desenvolvido nas linguagens C e Vala. Conta
+                  também com estilizações em CSS.
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </main>
+      <footer>Copyright@Paulo Queiroz — Bora Programar</footer>
+    </div>
+  </body>
+</html>
