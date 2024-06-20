@@ -22,6 +22,7 @@ targets = files(
     'week_03/03_naming_roads.c',
     'week_03/04_the_force_awakens.c',
     'week_03/05_christmas_gift.c',
+    'week_04/01_in_debt.c',
     )
 
 tests = files(
