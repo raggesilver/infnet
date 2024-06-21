@@ -24,6 +24,7 @@ targets = files(
     'week_03/05_christmas_gift.c',
     'week_04/01_in_debt.c',
     'week_04/02_cards.c',
+    'week_04/03_bumpy_board.c',
     )
 
 tests = files(
