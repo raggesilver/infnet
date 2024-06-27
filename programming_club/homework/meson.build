@@ -27,6 +27,11 @@ targets = files(
     'week_04/03_bumpy_board.c',
     'week_04/04_war.c',
     'week_04/05_divisible_by_seven.c',
+    'maratona/01.c',
+    'maratona/02.c',
+    'maratona/03.c',
+    'maratona/04.c',
+    'maratona/06.c',
     )
 
 tests = files(
