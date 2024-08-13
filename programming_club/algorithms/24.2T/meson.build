@@ -27,6 +27,7 @@ targets = files(
     'week_04/03_bumpy_board.c',
     'week_04/04_war.c',
     'week_04/05_divisible_by_seven.c',
+    'week_04/06_whos_going_to_the_party.c',
     'maratona/01.c',
     'maratona/02.c',
     'maratona/03.c',
