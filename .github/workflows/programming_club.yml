@@ -17,7 +17,7 @@ jobs:
     steps:
       - id: checkout
         name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - id: setup-gcc
         name: Set up GCC
         uses: egor-tensin/setup-gcc@v1
