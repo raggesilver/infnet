@@ -1,0 +1,8 @@
+.corVermelha {
+  color: red;
+}
+
+h1 {
+  user-select: none;
+  -webkit-user-select: none;
+}

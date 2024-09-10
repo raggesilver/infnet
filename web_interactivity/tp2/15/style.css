@@ -1,0 +1,18 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+#tabela {
+  text-align: center;
+  width: 250px;
+}
+
+.aprovado {
+  background-color: green;
+}
+
+.reprovado {
+  background-color: red;
+}
