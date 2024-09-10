@@ -1,0 +1,7 @@
+.lista {
+  border: 2px solid black;
+}
+
+.listaSelecionada {
+  border: 2px solid red;
+}

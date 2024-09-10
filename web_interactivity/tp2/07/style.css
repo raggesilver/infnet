@@ -1,0 +1,9 @@
+.blah {
+  background-color: blue;
+  min-height: 20px;
+  width: 100%;
+
+  & p {
+    display: none;
+  }
+}
