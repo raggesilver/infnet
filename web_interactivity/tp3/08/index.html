@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Arquivo padrão</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <form>
+      <div>
+        <label for="pais">País:</label>
+        <input type="text" id="pais" name="pais" placeholder="País" />
+      </div>
+
+      <div>
+        <label for="cor">Cor principal da bandeira:</label>
+        <input
+          type="color"
+          id="cor"
+          name="cor"
+          placeholder="Cor principal da bandeira"
+          value="#4D9A50"
+        />
+      </div>
+
+      <div>
+        <label for="descricao">Descrição:</label>
+        <textarea
+          id="descricao"
+          name="descricao"
+          placeholder="Descrição"
+          rows="3"
+          style="resize: none"
+        ></textarea>
+      </div>
+
+      <fieldset>
+        <legend>Continente</legend>
+        <label>
+          <input type="radio" name="continente" value="america" /> América
+        </label>
+        <label>
+          <input type="radio" name="continente" value="africa" /> África
+        </label>
+        <label>
+          <input type="radio" name="continente" value="europa" /> Europa
+        </label>
+        <label>
+          <input type="radio" name="continente" value="asia" /> Ásia
+        </label>
+        <label>
+          <input type="radio" name="continente" value="oceania" /> Oceania
+        </label>
+      </fieldset>
+
+      <button type="submit">Enviar</button>
+    </form>
+    <script src="script.js"></script>
+  </body>
+</html>
