@@ -9,6 +9,8 @@ const containers = document.querySelectorAll(".container");
 const newBoxButton = document.getElementById("criar");
 const newBoxContainer = document.getElementById("novo");
 
+const colorClasses = ["corVerde", "corRoxa", "corLaranja", "corVermelha"];
+
 /**
  * @param {HTMLDivElement} box
  */
@@ -71,6 +73,11 @@ function setupContainer(container) {
 newBoxButton?.addEventListener("click", () => {
   const newBox = document.createElement("div");
   newBox.classList.add("caixinha");
+
+  newBox.classList.add(
+    colorClasses[Math.floor(Math.random() * colorClasses.length)],
+  );
+
   setupBox(newBox);
   newBoxContainer?.appendChild(newBox);
 });
