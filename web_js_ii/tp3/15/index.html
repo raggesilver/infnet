@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tarefas</title>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <h1>Tarefas</h1>
+
+    <form id="task-form">
+      <div>
+        <label for="task">Tarefa</label>
+        <input
+          id="task"
+          name="task"
+          type="text"
+          placeholder="Digite a nova tarefa"
+          required
+          minlength="4"
+          autocomplete="off"
+          autofocus
+        />
+      </div>
+
+      <button type="submit">Adicionar</button>
+    </form>
+
+    <ul id="task-list"></ul>
+
+    <script defer type="module">
+      import { onCreateTask } from "./script.js";
+
+      const form = document.getElementById("task-form");
+      form.addEventListener("submit", onCreateTask);
+    </script>
+  </body>
+</html>
