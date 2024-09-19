@@ -85,7 +85,56 @@ describe("reactive list", () => {
 
     array.splice(0, 2);
 
+    expect(Array.from(array)).toMatchObject([{ id: 3, name: "Frodo" }]);
+
     expect(root.children.length).toBe(1);
     expect(root.children[0]?.getAttribute(LIST_DATA_ATTRIBUTE)).toEqual("3");
+  });
+
+  it("should remove items and insert new ones (splice)", () => {
+    const root = document.createElement("div");
+
+    const array = reactiveList<Item>(root, "id", createItemElement);
+
+    array.push({ id: 1, name: "Alice" });
+    array.push({ id: 2, name: "Bob" });
+    array.push({ id: 3, name: "Frodo" });
+
+    expect(root.children.length).toBe(3);
+
+    array.splice(0, 2, { id: 4, name: "Gandalf" });
+
+    expect(Array.from(array)).toMatchObject([
+      { id: 4, name: "Gandalf" },
+      { id: 3, name: "Frodo" },
+    ]);
+
+    expect(root.children.length).toBe(2);
+    expect(root.children[0]?.getAttribute(LIST_DATA_ATTRIBUTE)).toEqual("4");
+    expect(root.children[1]?.getAttribute(LIST_DATA_ATTRIBUTE)).toEqual("3");
+  });
+
+  it("should insert new items (splice)", () => {
+    const root = document.createElement("div");
+
+    const array = reactiveList<Item>(root, "id", createItemElement);
+
+    array.push({ id: 1, name: "Alice" });
+    array.push({ id: 2, name: "Bob" });
+
+    expect(root.children.length).toBe(2);
+
+    array.splice(1, 0, { id: 3, name: "Frodo" });
+
+    expect(Array.from(array)).toMatchObject([
+      { id: 1, name: "Alice" },
+      { id: 3, name: "Frodo" },
+      { id: 2, name: "Bob" },
+    ]);
+
+    expect(root.children.length).toBe(3);
+    expect(root.children[0]?.getAttribute(LIST_DATA_ATTRIBUTE)).toEqual("1");
+    expect(root.children[1]?.getAttribute(LIST_DATA_ATTRIBUTE)).toEqual("3");
+    expect(root.children[2]?.getAttribute(LIST_DATA_ATTRIBUTE)).toEqual("2");
   });
 });

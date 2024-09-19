@@ -82,9 +82,15 @@ export const reactiveList = <T>(
           return ret;
         };
       } else if (prop === "splice") {
-        return (start: number, length: number) => {
+        return (start: number, length: number, ...newItems: T[]) => {
+          // Remove the elements from the DOM
           const ret = target.splice(start, length);
           removeElementSequence(ret, target, start);
+          target.splice(start, 0, ...newItems);
+          // Insert the new elements (there might be none)
+          for (let i = 0; i < newItems.length; i++) {
+            insertElement(newItems[i], target, start + i);
+          }
           return ret;
         };
       } else {

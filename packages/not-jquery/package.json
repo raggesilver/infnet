@@ -1,6 +1,6 @@
 {
   "name": "@raggesilver/not-jquery",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A simple jQuery-inspired library for DOM manipulation.",
   "type": "module",
   "files": [
