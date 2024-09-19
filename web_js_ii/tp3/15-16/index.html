@@ -11,10 +11,10 @@
 
     <form id="task-form">
       <div>
-        <label for="task">Tarefa</label>
+        <label for="descricao">Tarefa</label>
         <input
-          id="task"
-          name="task"
+          id="descricao"
+          name="descricao"
           type="text"
           placeholder="Digite a nova tarefa"
           required
@@ -22,6 +22,14 @@
           autocomplete="off"
           autofocus
         />
+      </div>
+      <div>
+        <label for="prioridade">Prioridade</label>
+        <select id="prioridade" name="prioridade">
+          <option value="baixa">Baixa</option>
+          <option value="media">Média</option>
+          <option value="alta">Alta</option>
+        </select>
       </div>
 
       <button type="submit">Adicionar</button>
