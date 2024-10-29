@@ -1,6 +1,9 @@
 """
 For some reason this program is causing a runtime error on the online judge.
 It works fine on my machine.
+
+SOLUTION: Beecrowd was running on Python 3.11. Python 3.12 fixed a limitation
+with f-strings that was causing the runtime error.
 """
 
 high_cards = {
@@ -28,5 +31,5 @@ for i in range(52):
         high_play = None
         player_points[player] += points
 
-print(f"Player A: {player_points["A"]} point(s).")
-print(f"Player B: {player_points["B"]} point(s).")
+print(f"Player A: {player_points['A']} point(s).")
+print(f"Player B: {player_points['B']} point(s).")
