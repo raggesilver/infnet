@@ -34,11 +34,11 @@ class ProjectManagerService:
 
         return list(self.projects[project_id])
 
-    def list_employees_in_projects(self, project_a: int, project_b: int) -> list[str]:
-        if project_a not in self.projects:
-            raise ValueError(f"Projeto {project_a} não encontrado")
-
-        if project_b not in self.projects:
-            raise ValueError(f"Projeto {project_b} não encontrado")
-
+    def list_employees_in_both(self, project_a: int, project_b: int) -> list[str]:
         return list(self.projects[project_a].intersection(self.projects[project_b]))
+
+    def list_employees_in_only_one_project(self) -> list[str]:
+        return list(self.projects[1].difference(self.projects[2]))
+
+    def list_all_employees(self) -> list[str]:
+        return list(self.projects[1].union(self.projects[2]))
