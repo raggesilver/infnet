@@ -1,10 +1,8 @@
 from typing import Callable, Literal, Tuple
 
 from colors import TerminalTextStyle
-from tabulate import tabulate
-
 from product_service import Product
-
+from tabulate import tabulate
 
 type ValidationFunction = Callable[
     [int], Tuple[Literal[True], None] | Tuple[Literal[False], str]

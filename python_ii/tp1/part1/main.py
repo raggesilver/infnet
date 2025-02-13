@@ -104,7 +104,11 @@ def main():
     try:
         menu(product_service)
     except KeyboardInterrupt:
-        print("\nSaindo...")
+        pass
+
+    print("\nEncerrando programa. Resumo dos produtos:\n")
+    print_products(product_service.get_all_products())
+    print("")
 
 
 if __name__ == "__main__":
