@@ -149,3 +149,107 @@ Há três tipos de relações:
    para registrar relacionamentos N pra N. Se tivermos uma tabela `produtos` e
    outra tabela `compras`, precisaremos de uma tabela `produtos_compras` para
    registrar quais produtos foram comprados em cada compra.
+
+## Questão 3
+
+> Resolvi propor um esquema com quatro tabelas ao invés de três, para que o
+> seja possível registrar multiplos produtos em um pedido (precisamos de uma
+> tabela extra para isso).
+
+```sql
+-- Tabela clientes
+CREATE TABLE clientes (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR NOT NULL
+);
+
+-- Tabela produtos
+CREATE TABLE produtos (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR NOT NULL,
+    preco DECIMAL NOT NULL
+);
+
+-- Tabela pedidos
+CREATE TABLE pedidos (
+    id SERIAL PRIMARY KEY,
+    cliente_id INT NOT NULL,
+    total DECIMAL NOT NULL,
+
+    -- Chave estrangeira cliente_id
+    CONSTRAINT fk_cliente_id
+        FOREIGN KEY (cliente_id)
+        REFERENCES clientes(id)
+);
+
+-- Tabela relacional pedido produtos (N para N)
+CREATE TABLE pedido_produtos (
+    id SERIAL PRIMARY KEY,
+    pedido_id INT NOT NULL,
+    produto_id INT NOT NULL,
+    quantidade INT NOT NULL,
+
+    -- Chave estrangeira pedido_id. Se o pedido for deletado, deletaremos também
+    -- a relação entre pedido e produto.
+    CONSTRAINT fk_pedido_id
+        FOREIGN KEY (pedido_id)
+        REFERENCES pedidos(id),
+
+    -- Chave estrangeira produto_id
+    CONSTRAINT fk_produto_id
+        FOREIGN KEY (produto_id)
+        REFERENCES produtos(id)
+);
+```
+
+## Questão 4
+
+Restrições são importantes para garantir que os dados inseridos no banco de
+dados sigam as regras de negócio estabelecidas pelos desenvolvedores. Não só
+isso, como elas também garantem a integridade dos dados e evitam
+inconsistências — por meio de chaves primárias, chaves estrangeiras, _checks_,
+etc.
+
+Na tabela `pedido_produtos` que criamos acima, por exemplo, a restrição de chave
+estrangeira previne que um produto seja deletado caso exista algum pedido que
+faça referência a ele. Isso evita que um dia um produto seja deletado e quebre
+a aplicação, pois o carrinho de um cliente agora tem `NULL` ao invés do produto
+que ele comprou.
+
+Outra restrição importante são as de unicidade, que garantem que duas linhas em
+uma tabela não tenham o mesmo valor em uma (ou mais) coluna(s). O exemplo mais
+simples disso é a chave primária, que garante que não existam duas linhas com o
+mesmo valor de `id`. Outro exemplo comum é a restrição `UNIQUE`, que é comumente
+utilizada para garantir que não existam dois usuários com o mesmo e-mail ou nome
+de usuário.
+
+Por último, temos ainda as restrições de _check_, que podemos utilizar para
+enforçar regras de negócio mais particulares. Por exemplo, podemos criar um
+_check_ na tabela `pedidos` que não permite que o total de um pedido seja menor
+que 100 reais.
+
+```sql
+ALTER TABLE pedidos ADD CONSTRAINT check_total_minimo CHECK (total >= 100);
+```
+
+<!--
+Já os índices servem para acelerar a buscas em um banco de dados. Existem vários
+algorítimos utilizados para criar índices, como _B-trees_, _hash indexes_, etc.
+Cada um deles tem sua aplicação e impacto no desempenho do banco de dados, sendo
+uns mais apropriados para certas situações do que outros. Vale lembrar que
+índices diferentes ocupam diferentes quantidades de espaço de armazenamento, por
+isso performance nem sempre é o único fator a ser considerado.
+-->
+
+## Questão 5
+
+```sql
+-- É possível adicionar uma restrição de unicidade na coluna nome da tabela de
+-- produtos da seguinte forma:
+ALTER TABLE produtos ADD CONSTRAINT unique_product_name UNIQUE (nome);
+-- Porém, esse índice trata "MacBook" e "macbook" como strings diferentes. Para
+-- resolver isso, podemos criar um índice que ignora a diferença entre
+-- maiúsculas e minúsculas:
+CREATE UNIQUE INDEX unique_product_name ON produtos (LOWER(nome));
+-- (não faz sentido usar os dois, então escolha um).
+```
