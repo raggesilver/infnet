@@ -253,3 +253,46 @@ ALTER TABLE produtos ADD CONSTRAINT unique_product_name UNIQUE (nome);
 CREATE UNIQUE INDEX unique_product_name ON produtos (LOWER(nome));
 -- (não faz sentido usar os dois, então escolha um).
 ```
+
+## Questão 6
+
+```sql
+CREATE TABLE departamentos (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR NOT NULL
+);
+
+CREATE TABLE funcionarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR NOT NULL,
+    cpf VARCHAR(11) NOT NULL UNIQUE
+);
+
+CREATE UNIQUE INDEX departamento_nome_unico ON departamentos (LOWER(nome));
+
+CREATE TABLE projetos (
+    id SERIAL PRIMARY KEY,
+    departamento_id INT REFERENCES departamentos(id),
+    nome VARCHAR NOT NULL
+);
+
+-- Projetos devem ter nomes únicos, porém dois departamentos diferentes podem
+-- ter projetos com o mesmo nome.
+CREATE UNIQUE INDEX projeto_nome_unico ON projetos (LOWER(nome), departamento_id);
+```
+
+## Questão 7
+
+Funcionários já eram integrados a departamentos na questão anterior. Tudo o que
+precisamos fazer é criar um relacionamento entre funcionários e projetos. Para
+isso vou criar uma tabela `funcionarios_projetos` que permitirá que um
+funcionário participe de vários projetos e que um projeto tenha vários
+funcionários.
+
+```sql
+CREATE TABLE funcionarios_projetos (
+    funcionario_id INT REFERENCES funcionarios(id),
+    projeto_id INT REFERENCES projetos(id),
+    PRIMARY KEY (funcionario_id, projeto_id)
+);
+```
