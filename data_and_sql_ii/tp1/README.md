@@ -296,3 +296,74 @@ CREATE TABLE funcionarios_projetos (
     PRIMARY KEY (funcionario_id, projeto_id)
 );
 ```
+
+## Questão 8
+
+Transação é um mecanismo que permite que um conjunto de operações seja
+executado em sequência com a possibilidade de serem revertidas. Isso é útil
+quando alguma operação entre um query e outro pode falhar, invalidando todas as
+operações anteriores.
+
+As transações seguem as propriedades ACID:
+
+- Atomicidade: todas as operações são executadas com sucesso ou nenhuma é
+- Consistência: o banco permanece em estado válido antes e depois da transação
+- Isolamento: transações concorrentes não interferem uma na outra
+- Durabilidade: após confirmada, a transação é permanente
+
+Um exemplo clássico é uma compra. Suponha que temos as seguntes tabelas:
+
+- `clientes` (id, nome, saldo)
+- `produtos` (id, nome, preco, estoque)
+- `compras` (id, cliente_id, produto_id, quantidade, total)
+
+Para realizar uma compra, precisamos:
+
+- Atualizar o saldo do cliente
+- Atualizar o estoque do produto
+- Registrar a compra na tabela `compras`
+
+Se uma dessas operações falhar, precisamos reverter todas as operações
+anteriores. Felizmente, transações nos permitem fazer isso sem ter que
+reverter cada operação manualmente, usando os comandos BEGIN e ROLLBACK.
+
+Em código, isso seria:
+
+```sql
+BEGIN;
+  UPDATE clientes SET saldo = saldo - 100 WHERE id = 1;
+  UPDATE produtos SET estoque = estoque - 1 WHERE id = 1;
+  INSERT INTO compras (cliente_id, produto_id, quantidade, total)
+    VALUES (1, 1, 1, 100);
+COMMIT;
+```
+
+Vale ressaltar que transações não se limitam apenas a falhas nos próprios
+queries. O código da aplicação que executa esses queries também pode precisar
+cancelar uma transação após realizar validações de negócio. Por exemplo, usando
+SQLAlchemy (comum em aplicações Python), podemos fazer:
+
+```python
+with session.begin():
+    # Verificar saldo e produto (com lock)
+    cliente = session.query(Cliente).with_for_update().get(cliente_id)
+    produto = session.query(Produto).with_for_update().get(produto_id)
+
+    valor_total = produto.preco * quantidade
+
+    if cliente.saldo < valor_total:
+        raise ValueError("Saldo insuficiente")
+
+    # Atualizar saldo e estoque
+    cliente.saldo -= valor_total
+    produto.estoque -= quantidade
+
+    # Registrar compra
+    session.add(Compra(
+        cliente_id=cliente_id,
+        produto_id=produto_id,
+        quantidade=quantidade,
+        total=valor_total
+    ))
+
+```
