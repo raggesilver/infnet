@@ -367,3 +367,156 @@ with session.begin():
     ))
 
 ```
+
+## Questão 9
+
+```sql
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR NOT NULL,
+    email VARCHAR NOT NULL,
+    senha VARCHAR NOT NULL
+);
+
+CREATE UNIQUE INDEX unique_email ON usuarios (LOWER(email));
+
+CREATE TABLE produtos (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR NOT NULL,
+    preco DECIMAL NOT NULL,
+    estoque INT NOT NULL DEFAULT 0
+);
+
+CREATE TABLE categorias (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR NOT NULL
+);
+
+CREATE UNIQUE INDEX unique_categoria_nome ON categorias (LOWER(nome));
+
+CREATE TABLE produtos_categorias (
+    produto_id INT REFERENCES produtos(id),
+    categoria_id INT REFERENCES categorias(id),
+    PRIMARY KEY (produto_id, categoria_id)
+);
+
+CREATE TABLE pedidos (
+    id SERIAL PRIMARY KEY,
+    usuario_id INT REFERENCES usuarios(id),
+    total DECIMAL NOT NULL
+);
+
+CREATE TABLE pedidos_produtos (
+    id SERIAL PRIMARY KEY,
+    pedido_id INT REFERENCES pedidos(id),
+    produto_id INT REFERENCES produtos(id),
+    quantidade INT NOT NULL,
+    -- Salvar o preço do produto no momento da compra para evitar que alterações
+    -- futuras no preço do produto alterem o histórico de compras.
+    preco DECIMAL NOT NULL
+);
+```
+
+## Questão 10
+
+Existem dois tipos principais de pesquisas em bancos de dados: indexadas (_index
+scan_) e sequenciais (_sequential scan_). A primeira é mais rápida, pois o banco
+usa uma espécia de tabela rápida de índices para encontrar os registros. A
+segunda é mais lenta, pois o banco precisa ler todos os registros da tabela, um
+por um. Existem vários tipos de índices, como _B-trees_, _hash indexes_, _GiST_,
+_SP-GiST_, etc. Cada um tem suas aplicações.
+
+É importante notar que índices ocupam espaço de armazenamento, então nem sempre
+é indicado "indexar tudo".
+
+Vamos analizar alguns queries para o nosso sistema de e-commerce:
+
+1. **Listar todos os produtos de uma categoria:**
+
+```sql
+SELECT p.*
+FROM produtos p
+JOIN produtos_categorias pc ON p.id = pc.produto_id
+WHERE pc.categoria_id = 1;
+```
+
+Esse query já está otimizado, pois ele usa um índice da chave primária de
+`produtos_categorias` para encontrar todos os produtos pertencentes a categoria 1.
+A comparação `p.id = pc.produto_id` é feita de forma eficiente, pois
+`produto_id` é uma chave estrangeira que aponta para uma chave primária, e
+portanto já é indexada.
+
+2. **Listar todos os pedidos de um usuário:**
+
+```sql
+SELECT *
+FROM pedidos
+WHERE usuario_id = 1;
+```
+
+Da mesma forma, esse query já está otimizado, pois `usuario_id` é uma chave
+estrangeira que aponta para uma chave primária, e portanto já é indexada.
+
+3. **Pesquisar um produto pelo nome:**
+
+```sql
+SELECT * FROM produtos WHERE nome ILIKE '% de %';
+```
+
+Aqui, nós estamos procurando qualquer produto que tenha a palavra "de" no nome
+(cercado por espaços). Esse query não é otimizado, pois ele não usa um índice.
+Para retornar os resultados, o banco precisa fazer um _sequential scan_ na
+tabela `produtos`. Existem múltiplas formas de otimizar esse query, inclusive,
+alguns bancos de dados foram criados exclusivamente para buscas de texto, como o
+Elasticsearch.
+
+> Para os nosso exemplos de sala, não há benefício em criar um índice para a
+> coluna `nome` da tabela `produtos` dado a baixa quantidade de registros.
+> Inclusive, pode ser que a execução de um _sequential scan_ seja mais rápida
+> do que a busca em um índice.
+
+```sql
+-- Criaremos uma nova coluna que é automaticamente atualizada com o texto do
+-- nome do produto em formato de vetor — esse vetor optimiza a busca de texto,
+-- simplificando algumas palavras e removendo outras.
+ALTER TABLE produtos ADD COLUMN nome_vector GENERATED ALWAYS AS (
+    to_tsvector('portuguese', nome)
+) STORED;
+
+-- Criaremos um índice GIN (Generalized Inverted Index) para a coluna
+-- nome_vector.
+CREATE INDEX idx_nome_vector ON produtos USING GIN (nome_vector);
+
+-- Agora podemos fazer a busca de texto de forma otimizada.
+SELECT * FROM produtos WHERE nome_vector @@ to_tsquery('portuguese', 'sua pesquisa');
+```
+
+## Questão 11
+
+```sql
+-- Esse query retorna uma linha para cada produto registrado em uma compra para
+-- todas as compras. Em uma única linha retornamos o id da compra, o nome do
+-- cliente, o nome do produto e a quantidade comprada.
+--
+-- Para realizar esse query fiz o uso das chaves estrangeiras do pedidos_produtos
+-- para relacionar os produtos com as compras e os clientes.
+SELECT p.id as compra_id, u.nome as cliente, prod.nome as produto, pp.quantidade FROM produtos prod
+JOIN pedidos_produtos pp ON pp.produto_id = prod.id
+JOIN pedidos p ON p.id = pp.pedido_id
+JOIN usuarios u ON u.id = p.usuario_id;
+```
+
+## Questão 12
+
+As _foreign keys_ são necessárias para criar uma relação entre dados de duas
+tabelas de forma confiável. Isso por que quando uma relação é estabelecida para
+duas linhas em tabelas diferentes, o banco de dados vai garantir que a linha
+referenciada exista — isso é, que a chave estrangeira aponte para uma chave
+primária válida. Isso é o que garante que suas compras na Amazon, por exemplo,
+não desapareçam ou fiquem sem produtos caso um produto seja retirado de venda.
+
+Caso foreign keys não existissem, ainda poderíamos criar relações entre tabelas
+simplesmente inserindo os IDs externos em uma coluna. Porém, isso não garantiria
+a integridade dos dados e as referências poderiam ser facilmente quebradas se um
+dos registros fosse alterado ou deletado — é assim que funcionam bancos
+não-relacionais como o MongoDB.
