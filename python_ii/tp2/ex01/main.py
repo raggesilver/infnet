@@ -1,4 +1,4 @@
-from pandas import read_excel
+from pandas import read_excel, ExcelWriter
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -10,22 +10,22 @@ def read_products(file_path: str) -> "DataFrame":
     df["preco"] = df["preco"].astype(float)
     return df
 
-def adjust_prices(df: "DataFrame") -> None:
-    df["preco"] = df["preco"] * 1.05 # Increase prices by 5%
-    pass
+def adjust_prices(df: "DataFrame") -> "DataFrame":
+    result = df.copy()
+    result["preco"] = result["preco"].apply(lambda x: round(x * 1.05, 2))
+    return result
 
-def save_products(df: "DataFrame", file_path: str) -> None:
-    df.to_excel(file_path, index=False)
+def save_products(file_path: str, data: list[tuple[str, "DataFrame"]]) -> None:
+    with ExcelWriter(file_path) as writer:
+        for sheet_name, df in data:
+            df.to_excel(writer, index=False, sheet_name=sheet_name)
 
 def main():
-    f = "produtos.xlsx"
-    df = read_products(f)
-    print("Produtos antes do ajuste de preços:\n")
-    print(df)
-    adjust_prices(df)
-    save_products(df, f)
-    print("\n\nProdutos após o ajuste de preços:\n")
-    print(df)
+    SOURCE_FILE = "produtos.xlsx"
+    TARGET_FILE = "produtos2.xlsx"
+    df = read_products(SOURCE_FILE)
+    adjusted = adjust_prices(df)
+    save_products(TARGET_FILE, [("Antes", df), ("Depois", adjusted)])
 
 if __name__ == "__main__":
     main()
