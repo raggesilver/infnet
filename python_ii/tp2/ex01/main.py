@@ -1,31 +1,40 @@
-from pandas import read_excel, ExcelWriter
-from typing import TYPE_CHECKING
+from os import path
 
-if TYPE_CHECKING:
-    from pandas import DataFrame
+FILE = path.join(path.dirname(__file__), "nomes.txt")
 
 
-def read_products(file_path: str) -> "DataFrame":
-    df = read_excel(file_path)
-    df["preco"] = df["preco"].astype(float)
-    return df
+def ensure_file(path: str):
+    with open(path, "w+") as f:
+        f.write(
+            """Maria
+Luiz
+Felipe
+Clara
+Luiza
+João
+José
+Roberto"""
+        )
 
-def adjust_prices(df: "DataFrame") -> "DataFrame":
-    result = df.copy()
-    result["preco"] = result["preco"].apply(lambda x: round(x * 1.05, 2))
-    return result
 
-def save_products(file_path: str, data: list[tuple[str, "DataFrame"]]) -> None:
-    with ExcelWriter(file_path) as writer:
-        for sheet_name, df in data:
-            df.to_excel(writer, index=False, sheet_name=sheet_name)
+def read_names(path: str):
+    with open(path, "r") as f:
+        return [n.strip() for n in f.readlines()]
+
+
+def write_names(path: str, names: list):
+    with open(path, "w+") as f:
+        f.write("\n".join(names))
+
 
 def main():
-    SOURCE_FILE = "produtos.xlsx"
-    TARGET_FILE = "produtos2.xlsx"
-    df = read_products(SOURCE_FILE)
-    adjusted = adjust_prices(df)
-    save_products(TARGET_FILE, [("Antes", df), ("Depois", adjusted)])
+    ensure_file(FILE)
+    names = read_names(FILE)
+    # print(*[f"'{name.strip()}'" for name in names], sep="\n")
+    sorted_names = sorted(names)
+    # print(*[f"'{name.strip()}'" for name in sorted_names], sep="\n")
+    write_names(FILE, sorted_names)
+
 
 if __name__ == "__main__":
     main()
