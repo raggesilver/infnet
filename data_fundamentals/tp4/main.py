@@ -10,6 +10,10 @@ if TYPE_CHECKING:
 
 SOURCE_CSV = "dados_criminalidade.csv"
 RESULT_JSON = "resultado.json"
+MYSQL_USER = "admin"
+MYSQL_PASSWORD="admin"
+MYSQL_HOST = "localhost"
+MYSQL_DATABASE = "infnet_tp4"
 
 
 def ensure_db(cursor: "MySQLCursorAbstract"):
@@ -122,7 +126,7 @@ WHERE gravidade IN ('Grave', 'Crítica')"""
 
 
 conn = mysql.connector.connect(
-    host="localhost", user="admin", password="admin", database="infnet_tp4"
+    host=MYSQL_HOST, user=MYSQL_USER, password=MYSQL_PASSWORD, database=MYSQL_DATABASE
 )
 
 cursor = conn.cursor()
