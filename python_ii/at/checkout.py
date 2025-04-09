@@ -106,7 +106,7 @@ def product_shopping(session: Session, compra: Compra) -> None:
         # Update product stock
         product.quantidade -= quantity
 
-        # Commit changes
+        # Commit changes - Ensures inventory updates are persisted
         session.commit()
 
 
@@ -127,7 +127,7 @@ def customer_checkout(session: Session) -> Compra:
     now = datetime.now().strftime("%Y-%m-%d %H:%M")
     compra = Compra(data_compra=now, id_cliente=customer.id_cliente)
     session.add(compra)
-    session.commit()
+    session.commit()  # Commit to ensure purchase is persisted
 
     # Handle product shopping
     product_shopping(session, compra)
@@ -146,7 +146,9 @@ def register_loop(session: Session) -> None:
     Returns:
         None
     """
-    purchases = []
+    # Load all existing purchases from the database instead of using an empty list
+    # This ensures we don't lose purchases between program runs
+    purchases = session.query(Compra).all()
 
     while True:
         print("\n--- Sistema de Caixa de Supermercado ---")
@@ -168,9 +170,15 @@ def register_loop(session: Session) -> None:
             print("\n--- Nota Fiscal ---")
             print_receipt(session, compra)
 
+            # Final commit to ensure all data is saved
+            session.commit()
+
         elif option == 2:
             # Close checkout and show summary
             print("\n--- Fechando Caixa ---")
             print_sales_summary(session, purchases)
             print_out_of_stock(session)
+
+            # Final commit to ensure all data is saved
+            session.commit()
             break
