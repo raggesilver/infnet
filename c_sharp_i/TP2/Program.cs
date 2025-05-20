@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 
-namespace TP1;
+namespace TP2;
 
 internal static class Program
 {
@@ -30,8 +30,8 @@ internal static class Program
       var width = Exercises.Length.ToString().Length;
       for (var i = 0; i < Exercises.Length; i++)
         Console.WriteLine(
-          $"{(i + 1).ToString().PadRight(width)}) {Exercises[i].Name}");
-      Console.WriteLine($"{"0".PadRight(width)}) Sair");
+          $"{(i + 1).ToString().PadLeft(width)}) {Exercises[i].Name}");
+      Console.WriteLine($"{"0".PadLeft(width)}) Sair");
 
       var exerciseNumber =
         Utils.ReadInt("\nDigite o número do exercício que deseja executar: ",

@@ -1,4 +1,4 @@
-namespace TP1;
+namespace TP2;
 
 public class Exercise6 : IExercise
 {

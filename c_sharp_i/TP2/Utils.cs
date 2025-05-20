@@ -1,4 +1,4 @@
-namespace TP1;
+namespace TP2;
 
 public static class Utils
 {
@@ -68,7 +68,7 @@ public static class Utils
       Console.WriteLine(error);
     }
   }
-  
+
   /// <summary>
   ///   Reads a non-empty string input from the console, with an optional custom error message
   ///   for invalid input.
@@ -94,24 +94,24 @@ public static class Utils
     {
       Console.Write(message);
       var input = Console.ReadLine() ?? string.Empty;
-      
+
       if (string.IsNullOrWhiteSpace(input))
       {
         Console.WriteLine(error);
         continue;
       }
-      
+
       // If no validator provided or validation passes
       if (validator == null) return input;
-      
+
       var (isValid, customError) = validator(input);
       if (isValid) return input;
-      
+
       // Show the custom error message if provided, otherwise use default error
       Console.WriteLine(customError ?? error);
     }
   }
-  
+
   /// <summary>
   ///   Reads a float input from the console, with optional validation and custom
   ///   error messages.
@@ -141,10 +141,10 @@ public static class Utils
       {
         // If no validator provided or validation passes
         if (validator == null) return result;
-  
+
         var (isValid, customError) = validator(result);
         if (isValid) return result;
-  
+
         // Show the custom error message if provided, otherwise use default error
         Console.WriteLine(customError ?? error);
       }
