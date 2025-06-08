@@ -11,6 +11,9 @@ public class Main {
     new EmptyExercise("Modelando uma Conta Bancária"),
     new EmptyExercise("Criando Métodos"),
     new Exercise09(),
+    new EmptyExercise("Definindo Classes para Formas Geométricas"),
+    new EmptyExercise("Criando Métodos de Cálculo"),
+    new Exercise12(),
   };
 
   public static void main(String[] args) {
