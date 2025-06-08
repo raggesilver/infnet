@@ -23,4 +23,8 @@ public class Account {
   public double calculateInterest() {
     return this.balance * 0.1;
   }
+
+  public void displayInfo() {
+    System.out.printf("Conta #%d (Ag. %d)\nTitular: %s\nSaldo: R$ %.2f\nAberta em: %s\n", number, agency, holder, balance, openedOn);
+  }
 }
