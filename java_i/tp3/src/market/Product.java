@@ -21,12 +21,35 @@ public class Product {
     this.quantityInStock = quantityInStock;
   }
 
+  // Getters e setters são úteis para expor campos privados (getter) e permitir
+  // que campos privados sejam alterados (setters). Por si só, getters e setters
+  // em campos públicos são boilerplate inúteis; a vantagem em utilizá-los
+  // começa em campos privados quando introduzimos lógica extra em um setter
+  // (de validação, por exemplo) ou combinamos múltiplos campos no retorno (por
+  // exemplo, para combinar primeiro e último nome em um getter "nomeCompleto").
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
   public void setPrice(double price) {
     this.price = price;
   }
 
   public void setQuantityInStock(int quantityInStock) {
     this.quantityInStock = quantityInStock;
+  }
+
+  public String getName() {
+    return this.name;
+  }
+
+  public double getPrice() {
+    return this.price;
+  }
+
+  public int getQuantityInStock() {
+    return this.quantityInStock;
   }
 
   public void displayInfo() {
