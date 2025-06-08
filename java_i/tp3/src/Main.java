@@ -3,7 +3,8 @@ import java.util.Scanner;
 public class Main {
   private final static IExercise[] exercises = {
     new Exercise01(),
-    new EmptyExercise("Criando a Classe “Produto” (Com Contexto de Usuário)")
+    new EmptyExercise("Criando a Classe “Produto” (Com Contexto de Usuário)"),
+    new EmptyExercise("Métodos Básicos da Classe “Produto”"),
   };
 
   public static void main(String[] args) {

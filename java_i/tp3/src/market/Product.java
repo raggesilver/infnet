@@ -20,4 +20,16 @@ public class Product {
     this.price = price;
     this.quantityInStock = quantityInStock;
   }
+
+  public void setPrice(double price) {
+    this.price = price;
+  }
+
+  public void setQuantityInStock(int quantityInStock) {
+    this.quantityInStock = quantityInStock;
+  }
+
+  public void displayInfo() {
+    System.out.printf("%s - R$ %.2f - %d em estoque", name, price, quantityInStock);
+  }
 }
