@@ -8,6 +8,7 @@ public class Main {
     new Exercise04(),
     new Exercise05(),
     new Exercise06(),
+    new EmptyExercise("Modelando uma Conta Bancária"),
   };
 
   public static void main(String[] args) {
