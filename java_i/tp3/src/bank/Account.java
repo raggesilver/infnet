@@ -11,4 +11,16 @@ public class Account {
   public double balance;
   // Registra quando a conta foi aberta
   public String openedOn;
+
+  public void withdraw(double amount) {
+    this.balance -= amount;
+  }
+
+  public void deposit(double amount) {
+    this.balance += amount;
+  }
+
+  public double calculateInterest() {
+    return this.balance * 0.1;
+  }
 }
