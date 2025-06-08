@@ -30,6 +30,6 @@ public class Product {
   }
 
   public void displayInfo() {
-    System.out.printf("%s - R$ %.2f - %d em estoque", name, price, quantityInStock);
+    System.out.printf("%s - R$ %.2f - %d em estoque\n", name, price, quantityInStock);
   }
 }

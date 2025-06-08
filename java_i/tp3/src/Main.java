@@ -5,6 +5,7 @@ public class Main {
     new Exercise01(),
     new EmptyExercise("Criando a Classe “Produto” (Com Contexto de Usuário)"),
     new EmptyExercise("Métodos Básicos da Classe “Produto”"),
+    new Exercise04(),
   };
 
   public static void main(String[] args) {
