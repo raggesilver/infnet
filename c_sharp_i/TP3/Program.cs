@@ -6,7 +6,9 @@ internal static class Program
 {
   private static readonly IExercise[] Exercises =
   [
-    new Exercise01()
+    new Exercise01(),
+    new TheoreticalExercise("Criando a Classe \"Ingresso\"",
+      "Dê uma olhada no arquivo Ticket.cs")
   ];
 
   private static void Main(string[] args)
