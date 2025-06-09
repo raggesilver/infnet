@@ -8,9 +8,9 @@ public class Exercise04 : IExercise
   {
     var ticket = new Ticket
     {
-      price = 20f,
-      name = "Skillet",
-      quantity = 200
+      Price = 20f,
+      Name = "Skillet",
+      Quantity = 200
     };
 
     ticket.DisplayInfo();
