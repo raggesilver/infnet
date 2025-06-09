@@ -10,7 +10,8 @@ internal static class Program
     new TheoreticalExercise("Criando a Classe \"Ingresso\"",
       "Dê uma olhada no arquivo Ticket.cs"),
     new TheoreticalExercise("Métodos Básicos da Classe \"Ingresso\"",
-      "Dê uma olhada no arquivo Ticket.cs")
+      "Dê uma olhada no arquivo Ticket.cs"),
+    new Exercise04()
   ];
 
   private static void Main(string[] args)
