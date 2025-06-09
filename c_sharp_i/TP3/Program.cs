@@ -13,7 +13,12 @@ internal static class Program
       "Dê uma olhada no arquivo Ticket.cs"),
     new Exercise04(),
     new Exercise05(),
-    new Exercise06()
+    new Exercise06(),
+    new TheoreticalExercise("Modelando uma Matrícula",
+      "Dê uma olhada no arquivo Matricula.cs"),
+    new TheoreticalExercise("Criando Métodos na Classe de Matrícula",
+      "Dê uma olhada no arquivo Matricula.cs"),
+    new Exercise09()
   ];
 
   private static void Main(string[] args)
