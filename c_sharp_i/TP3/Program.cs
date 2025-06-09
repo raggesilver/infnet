@@ -18,7 +18,12 @@ internal static class Program
       "Dê uma olhada no arquivo Matricula.cs"),
     new TheoreticalExercise("Criando Métodos na Classe de Matrícula",
       "Dê uma olhada no arquivo Matricula.cs"),
-    new Exercise09()
+    new Exercise09(),
+    new TheoreticalExercise("Definindo Classes de Formas Geométricas",
+      "Dê uma olhada nos arquivos Circle.cs e Sphere.cs"),
+    new TheoreticalExercise("Criando Métodos de Cálculo",
+      "Dê uma olhada nos métodos para calcular área e volume nos arquivos Circle.cs e Sphere.cs"),
+    new Exercise12()
   ];
 
   private static void Main(string[] args)
