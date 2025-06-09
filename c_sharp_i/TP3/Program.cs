@@ -8,6 +8,8 @@ internal static class Program
   [
     new Exercise01(),
     new TheoreticalExercise("Criando a Classe \"Ingresso\"",
+      "Dê uma olhada no arquivo Ticket.cs"),
+    new TheoreticalExercise("Métodos Básicos da Classe \"Ingresso\"",
       "Dê uma olhada no arquivo Ticket.cs")
   ];
 
