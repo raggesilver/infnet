@@ -12,7 +12,8 @@ internal static class Program
     new TheoreticalExercise("Métodos Básicos da Classe \"Ingresso\"",
       "Dê uma olhada no arquivo Ticket.cs"),
     new Exercise04(),
-    new Exercise05()
+    new Exercise05(),
+    new Exercise06()
   ];
 
   private static void Main(string[] args)
