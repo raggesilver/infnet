@@ -10,7 +10,8 @@ internal static class Program
     new Exercise02(),
     new Exercise03(),
     new Exercise04(),
-    new Exercise05()
+    new Exercise05(),
+    new Exercise06()
   ];
 
   private static void Main(string[] args)
