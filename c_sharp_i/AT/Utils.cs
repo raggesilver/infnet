@@ -54,18 +54,37 @@ public static class Utils
   ///   The default error message displayed when the input is invalid. Defaults to
   ///   "Data inválida".
   /// </param>
+  /// <param name="validator">
+  ///   An optional function used to validate the input date. The function takes
+  ///   the input date and returns a tuple where the first value indicates if the
+  ///   input is valid, and the second value is an optional custom error message.
+  /// </param>
   /// <returns>
   ///   The valid DateTime value entered by the user.
   /// </returns>
   public static DateTime ReadDate(string message,
-    string error = "Data inválida")
+    string error = "Data inválida",
+    Func<DateTime, (bool isValid, string? errorMessage)>? validator = null)
   {
     while (true)
     {
       Console.Write(message);
       var input = Console.ReadLine();
-      if (DateTime.TryParse(input, out var result)) return result;
-      Console.WriteLine(error);
+      if (DateTime.TryParse(input, out var result))
+      {
+        // If no validator provided or validation passes
+        if (validator == null) return result;
+
+        var (isValid, customError) = validator(result);
+        if (isValid) return result;
+
+        // Show the custom error message if provided, otherwise use default error
+        Console.WriteLine(customError ?? error);
+      }
+      else
+      {
+        Console.WriteLine(error);
+      }
     }
   }
 
