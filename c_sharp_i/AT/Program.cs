@@ -7,7 +7,8 @@ internal static class Program
   private static readonly IExercise[] Exercises =
   [
     new Exercise01(),
-    new Exercise02()
+    new Exercise02(),
+    new Exercise03()
   ];
 
   private static void Main(string[] args)
