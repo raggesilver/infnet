@@ -8,7 +8,8 @@ internal static class Program
   [
     new Exercise01(),
     new Exercise02(),
-    new Exercise03()
+    new Exercise03(),
+    new Exercise04()
   ];
 
   private static void Main(string[] args)
