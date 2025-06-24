@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 namespace AT;
 
 public static class Utils
@@ -174,6 +176,63 @@ public static class Utils
       {
         Console.WriteLine(error);
       }
+    }
+  }
+
+  /// <summary>
+  ///   Reads a formatted string input from the console, validating against a
+  ///   specified regex pattern
+  ///   and an optional custom validation function.
+  /// </summary>
+  /// <param name="message">The message displayed to prompt the user for input.</param>
+  /// <param name="regex">
+  ///   The regular expression used to validate the format of the
+  ///   input string.
+  /// </param>
+  /// <param name="error">
+  ///   The default error message displayed when the input does not match the regex
+  ///   pattern
+  ///   or fails custom validation. Defaults to "Formato inválido".
+  /// </param>
+  /// <param name="validator">
+  ///   An optional function used for additional validation of the input string. The
+  ///   function
+  ///   takes the input string and returns a tuple where the first value indicates if
+  ///   the
+  ///   input is valid, and the second value is an optional custom error message.
+  /// </param>
+  /// <returns>
+  ///   The validated string that matches the specified regex pattern and passes any
+  ///   custom
+  ///   validation provided.
+  /// </returns>
+  public static string ReadFormattedString(string message, Regex regex,
+    string error = "Formato inválido",
+    Func<string, (bool isValid, string? errorMessage)>? validator = null)
+  {
+    while (true)
+    {
+      Console.Write(message);
+      var input = Console.ReadLine() ?? string.Empty;
+
+      if (string.IsNullOrWhiteSpace(input))
+      {
+        Console.WriteLine("Campo não pode ser vazio");
+        continue;
+      }
+
+      if (!regex.IsMatch(input))
+      {
+        Console.WriteLine(error);
+        continue;
+      }
+
+      if (validator == null) return input;
+
+      var (isValid, customError) = validator(input);
+      if (isValid) return input;
+
+      Console.WriteLine(customError ?? error);
     }
   }
 }
