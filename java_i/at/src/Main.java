@@ -7,6 +7,7 @@ public class Main {
     new Exercise03(),
     new Exercise04(),
     new Exercise05(),
+    new Exercise06(),
   };
 
   public static void main(String[] args) {
