@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Main {
   private final static IExercise[] exercises = {
     new Exercise01(),
+    new Exercise02(),
   };
 
   public static void main(String[] args) {
