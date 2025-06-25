@@ -4,6 +4,7 @@ public class Main {
   private final static IExercise[] exercises = {
     new Exercise01(),
     new Exercise02(),
+    new Exercise03(),
   };
 
   public static void main(String[] args) {
