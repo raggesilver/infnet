@@ -1,9 +1,34 @@
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Currency;
 import java.util.Scanner;
 
 public class Utils {
+  /**
+   * Formats a double value as currency using the system default locale.
+   *
+   * @param amount the monetary amount to format
+   * @return formatted string in system default currency format
+   */
+  public static String formatMoney(double amount) {
+    var currencyFormat = NumberFormat.getCurrencyInstance();
+    currencyFormat.setCurrency(Currency.getInstance("BRL"));
+    return currencyFormat.format(amount);
+  }
+
+  /**
+   * Formats a number using the system default locale formatting.
+   *
+   * @param number the number to format
+   * @return formatted string in system default number format
+   */
+  public static String formatNumber(double number) {
+    var numberFormat = NumberFormat.getNumberInstance();
+    return numberFormat.format(number);
+  }
+
   /**
    * Reads a non-empty string from the user. Prompts the user with the provided message
    * and ensures the input is not empty before returning it.
