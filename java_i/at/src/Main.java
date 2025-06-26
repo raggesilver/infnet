@@ -13,6 +13,7 @@ public class Main {
     new Exercise09(),
     new Exercise10(),
     new Exercise11(),
+    new Exercise12(),
   };
 
   public static void main(String[] args) {
