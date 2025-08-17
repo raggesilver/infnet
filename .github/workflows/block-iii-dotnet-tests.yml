@@ -1,0 +1,50 @@
+name: Block III .NET Tests
+
+on:
+  push:
+    paths:
+      - 'block_iii/**'
+  pull_request:
+    paths:
+      - 'block_iii/**'
+
+jobs:
+  find-projects:
+    runs-on: ubuntu-latest
+    outputs:
+      test-projects: ${{ steps.find-tests.outputs.test-projects }}
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Find test projects
+      id: find-tests
+      run: |
+        # Find all test projects in block_iii
+        projects=$(find block_iii -name "*.csproj" | while read proj; do
+          if grep -q "Microsoft.NET.Test.Sdk\|xunit\|nunit\|MSTest" "$proj" 2>/dev/null; then
+            echo "$proj"
+          fi
+        done | jq -R -s -c 'split("\n")[:-1]')
+        echo "test-projects=$projects" >> $GITHUB_OUTPUT
+        echo "Found test projects: $projects"
+
+  test:
+    needs: find-projects
+    if: fromJson(needs.find-projects.outputs.test-projects)[0] != null
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        project: ${{ fromJson(needs.find-projects.outputs.test-projects) }}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
+
+    - name: Test ${{ matrix.project }}
+      run: |
+        echo "Testing project: ${{ matrix.project }}"
+        dotnet test "${{ matrix.project }}" --configuration Release --logger trx --collect:"XPlat Code Coverage"
