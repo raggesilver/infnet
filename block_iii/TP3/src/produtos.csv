@@ -1,0 +1,9 @@
+id,name,description,price,stock_quantity,created_at,updated_at
+1,Smartphone Galaxy S24,Smartphone Samsung Galaxy S24 128GB,899.99,25,2024-01-15,2024-08-10
+2,Notebook Dell Inspiron,Notebook Dell Inspiron 15 Intel i5 8GB RAM,2499.90,12,2024-02-20,2024-08-12
+3,Mouse Gamer RGB,Mouse gamer com iluminação RGB e 6 botões,89.90,150,2024-03-05,2024-08-15
+4,Teclado Mecânico,Teclado mecânico com switches blue,199.99,45,2024-03-10,2024-08-14
+5,Monitor 27 polegadas,Monitor LED 27 polegadas Full HD,699.00,8,2024-04-01,2024-08-16
+6,Fone Bluetooth,Fone de ouvido Bluetooth com cancelamento de ruído,299.90,33,2024-04-15,2024-08-11
+7,SSD 1TB,SSD NVMe 1TB para upgrade de performance,449.99,67,2024-05-01,2024-08-13
+8,Webcam HD,Webcam Full HD para videoconferências,129.90,89,2024-05-20,2024-08-17
