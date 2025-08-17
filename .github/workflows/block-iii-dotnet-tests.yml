@@ -4,9 +4,11 @@ on:
   push:
     paths:
       - 'block_iii/**'
+      - '.github/workflows/block-iii-dotnet-tests.yml'
   pull_request:
     paths:
       - 'block_iii/**'
+      - '.github/workflows/block-iii-dotnet-tests.yml'
 
 jobs:
   find-projects:
