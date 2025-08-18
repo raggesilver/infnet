@@ -1,0 +1,50 @@
+name: C# II .NET Build
+
+on:
+  push:
+    paths:
+      - 'c_sharp_ii/**'
+      - '.github/workflows/c-sharp-ii-dotnet-build.yml'
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    outputs:
+      assignments: ${{ steps.filter.outputs.changes }}
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - uses: dorny/paths-filter@v3
+      id: filter
+      with:
+        filters: |
+          TP1: c_sharp_ii/TP1/**
+          TP2: c_sharp_ii/TP2/**
+          TP3: c_sharp_ii/TP3/**
+          AT: c_sharp_ii/AT/**
+
+  build:
+    needs: changes
+    if: needs.changes.outputs.assignments != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        assignment: ${{ fromJSON(needs.changes.outputs.assignments) }}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
+
+    - name: Find and build projects in ${{ matrix.assignment }}
+      run: |
+        echo "Building projects in: c_sharp_ii/${{ matrix.assignment }}"
+        find "c_sharp_ii/${{ matrix.assignment }}" -name "*.csproj" | while read project; do
+          echo "Building project: $project"
+          dotnet build "$project" --configuration Release
+        done
