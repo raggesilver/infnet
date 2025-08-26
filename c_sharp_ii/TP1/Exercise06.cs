@@ -32,7 +32,7 @@ public class Exercise06 : IExercise
   }
 }
 
-internal static class Logger
+public static class Logger
 {
   public static void LogToConsole(string message)
   {
