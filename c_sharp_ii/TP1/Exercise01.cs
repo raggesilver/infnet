@@ -1,16 +1,13 @@
 
 namespace TP1;
 
-delegate double CalculateDiscount(double originalPrice);
+internal delegate double CalculateDiscount(double originalPrice);
 
 public class Exercise01 : IExercise
 {
   public string Name => "Implementação de Delegate Personalizado para Descontos";
 
-  private static readonly CalculateDiscount DiscountCalculator = originalPrice =>
-  {
-    return originalPrice * 0.9;
-  };
+  private static readonly CalculateDiscount DiscountCalculator = originalPrice => originalPrice * 0.9;
 
   public void Run(string[] args)
   {
