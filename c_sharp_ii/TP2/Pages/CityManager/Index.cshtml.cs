@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -5,37 +6,46 @@ namespace TP2.Pages.CityManager;
 
 public class Index : PageModel
 {
-  // Property to display the submitted city name (not bound)
-  public string? SubmittedCityName { get; set; }
+  [BindProperty] public InputModel Input { get; set; } = new();
+
+  // Property to track if the form was successfully submitted
+  public string? SuccessMessage { get; set; }
 
   public void OnGet()
   {
     // Initialize page for GET request
-    SubmittedCityName = null;
+    Input = new InputModel();
+    SuccessMessage = null;
   }
 
-  public IActionResult OnPost(string cityName)
+  public IActionResult OnPost()
   {
-    // Basic validation
-    if (string.IsNullOrWhiteSpace(cityName))
+    // Check if the model state is valid based on Data Annotations
+    if (!ModelState.IsValid)
     {
-      ModelState.AddModelError("cityName", "O nome da cidade é obrigatório");
+      // Return the page with validation errors
       return Page();
     }
 
-    if (cityName.Length is < 2 or > 100)
-    {
-      ModelState.AddModelError("cityName",
-        "O nome da cidade deve ter entre 2 e 100 caracteres");
-      return Page();
-    }
+    // If validation passes, process the city registration
+    SuccessMessage = $"Cidade \"{Input.CityName}\" foi cadastrada com sucesso!";
 
-    // Store the submitted city name to display in the success message
-    SubmittedCityName = cityName;
+    Console.WriteLine($"Cidade turística cadastrada: {Input.CityName}");
 
-    // Log or process the city registration
-    Console.WriteLine($"Cidade turística recebida: {cityName}");
+    // Reset the form after successful submission
+    Input = new InputModel();
 
     return Page();
+  }
+
+  // Nested InputModel class with Data Annotations
+  public class InputModel
+  {
+    [Required(ErrorMessage = "O nome da cidade é obrigatório")]
+    [MinLength(3,
+      ErrorMessage = "O nome da cidade deve ter no mínimo 3 caracteres")]
+    [StringLength(100,
+      ErrorMessage = "O nome da cidade deve ter no máximo 100 caracteres")]
+    public string CityName { get; set; } = string.Empty;
   }
 }
