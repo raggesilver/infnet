@@ -1,0 +1,42 @@
+@page
+@model TP2.Pages.CityManager.Index
+@{
+  ViewData["Title"] = "Cadastrar Cidade Turística";
+}
+
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="text-center">Cadastrar Cidade Turística</h3>
+        </div>
+        <div class="card-body">
+          @if (!string.IsNullOrEmpty(Model.CityName))
+          {
+            <div class="alert alert-success" role="alert">
+              <h4 class="alert-heading">Sucesso!</h4>
+              <p class="mb-0">Cidade "<strong>@Model.CityName</strong>" foi cadastrada com sucesso!</p>
+            </div>
+          }
+
+          <form method="post">
+            <div class="form-group mb-3">
+              <label asp-for="CityName" class="form-label">Nome da Cidade:</label>
+              <input asp-for="CityName" class="form-control" placeholder="Digite o nome da cidade turística" required />
+              <span asp-validation-for="CityName" class="text-danger"></span>
+            </div>
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary">Cadastrar Cidade</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@section Scripts {
+  <partial name="_ValidationScriptsPartial" />
+}
