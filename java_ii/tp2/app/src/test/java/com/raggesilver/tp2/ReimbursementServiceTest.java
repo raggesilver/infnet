@@ -3,6 +3,7 @@ package com.raggesilver.tp2;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class ReimbursementServiceTest {
 
@@ -10,7 +11,10 @@ class ReimbursementServiceTest {
   void shouldCallAuditWhenProcessingConsultation() {
     var calculator = new ReimbursementCalculator();
     var auditSpy = new SpyAudit();
-    var service = new ReimbursementService(calculator, auditSpy);
+    var authorizerMock = mock(ReimbursementAuthorizer.class);
+    when(authorizerMock.isAuthorized(any(), anyDouble())).thenReturn(true);
+
+    var service = new ReimbursementService(calculator, auditSpy, authorizerMock);
 
     var healthPlan = new StubHealthPlan(0.70);
     var patient = new Patient("John Doe", "123456", healthPlan);
@@ -23,5 +27,24 @@ class ReimbursementServiceTest {
     assertEquals(patient, auditSpy.getLastConsultation().getPatient());
     assertEquals(200.0, auditSpy.getLastConsultation().getValue());
     assertEquals(140.0, auditSpy.getLastConsultation().getReimbursementAmount());
+  }
+
+  @Test
+  void shouldThrowExceptionWhenAuthorizationDenied() {
+    var calculator = new ReimbursementCalculator();
+    var auditSpy = new SpyAudit();
+    var authorizerMock = mock(ReimbursementAuthorizer.class);
+    when(authorizerMock.isAuthorized(any(), anyDouble())).thenReturn(false);
+
+    var service = new ReimbursementService(calculator, auditSpy, authorizerMock);
+
+    var healthPlan = new StubHealthPlan(0.70);
+    var patient = new Patient("John Doe", "123456", healthPlan);
+
+    assertThrows(UnauthorizedReimbursementException.class, () -> {
+      service.processConsultation(patient, 200.0);
+    });
+
+    assertFalse(auditSpy.wasRegisterConsultationCalled());
   }
 }
