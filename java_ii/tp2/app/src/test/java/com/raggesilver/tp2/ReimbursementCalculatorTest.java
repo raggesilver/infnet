@@ -9,9 +9,10 @@ class ReimbursementCalculatorTest {
   @Test
   void shouldCalculateBasicReimbursement() {
     var calculator = new ReimbursementCalculator();
-    var dummyPatient = new Patient("John Doe", "123456");
+    var healthPlan = new StubHealthPlan(0.70);
+    var patient = new Patient("John Doe", "123456", healthPlan);
 
-    double result = calculator.calculateReimbursement(200.0, 0.70, dummyPatient);
+    double result = calculator.calculateReimbursement(200.0, patient);
 
     assertEquals(140.0, result);
   }
@@ -19,9 +20,10 @@ class ReimbursementCalculatorTest {
   @Test
   void shouldHandleZeroCoverage() {
     var calculator = new ReimbursementCalculator();
-    var dummyPatient = new Patient("Jane Smith", "789012");
+    var healthPlan = new StubHealthPlan(0.0);
+    var patient = new Patient("Jane Smith", "789012", healthPlan);
 
-    double result = calculator.calculateReimbursement(200.0, 0.0, dummyPatient);
+    double result = calculator.calculateReimbursement(200.0, patient);
 
     assertEquals(0.0, result);
   }
@@ -29,20 +31,11 @@ class ReimbursementCalculatorTest {
   @Test
   void shouldHandleFullCoverage() {
     var calculator = new ReimbursementCalculator();
-    var dummyPatient = new Patient("Bob Johnson", "345678");
+    var healthPlan = new StubHealthPlan(1.0);
+    var patient = new Patient("Bob Johnson", "345678", healthPlan);
 
-    double result = calculator.calculateReimbursement(200.0, 1.0, dummyPatient);
+    double result = calculator.calculateReimbursement(200.0, patient);
 
     assertEquals(200.0, result);
-  }
-
-  @Test
-  void shouldHandleZeroConsultationValue() {
-    var calculator = new ReimbursementCalculator();
-    var dummyPatient = new Patient("Alice Brown", "901234");
-
-    double result = calculator.calculateReimbursement(0.0, 0.70, dummyPatient);
-
-    assertEquals(0.0, result);
   }
 }

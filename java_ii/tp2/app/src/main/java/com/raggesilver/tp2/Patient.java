@@ -1,12 +1,14 @@
 package com.raggesilver.tp2;
 
 public class Patient {
-  private final String name;
-  private final String id;
+  private String name;
+  private String id;
+  private HealthPlan healthPlan;
 
-  public Patient(String name, String id) {
+  public Patient(String name, String id, HealthPlan healthPlan) {
     this.name = name;
     this.id = id;
+    this.healthPlan = healthPlan;
   }
 
   public String getName() {
@@ -15,5 +17,9 @@ public class Patient {
 
   public String getId() {
     return id;
+  }
+
+  public HealthPlan getHealthPlan() {
+    return healthPlan;
   }
 }
