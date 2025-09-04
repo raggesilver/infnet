@@ -9,8 +9,7 @@ class ReimbursementCalculatorTest {
   @Test
   void shouldCalculateBasicReimbursement() {
     var calculator = new ReimbursementCalculator();
-    var healthPlan = new StubHealthPlan(0.70);
-    var patient = new Patient("John Doe", "123456", healthPlan);
+    var patient = TestUtils.createPatient();
 
     double result = calculator.calculateReimbursement(200.0, patient);
 
@@ -20,8 +19,7 @@ class ReimbursementCalculatorTest {
   @Test
   void shouldHandleZeroCoverage() {
     var calculator = new ReimbursementCalculator();
-    var healthPlan = new StubHealthPlan(0.0);
-    var patient = new Patient("Jane Smith", "789012", healthPlan);
+    var patient = TestUtils.createPatient("Jane Smith", "789012", 0.0);
 
     double result = calculator.calculateReimbursement(200.0, patient);
 
@@ -31,8 +29,7 @@ class ReimbursementCalculatorTest {
   @Test
   void shouldHandleFullCoverage() {
     var calculator = new ReimbursementCalculator();
-    var healthPlan = new StubHealthPlan(1.0);
-    var patient = new Patient("Bob Johnson", "345678", healthPlan);
+    var patient = TestUtils.createPatient("Bob Johnson", "345678", 1.0);
 
     double result = calculator.calculateReimbursement(200.0, patient);
 

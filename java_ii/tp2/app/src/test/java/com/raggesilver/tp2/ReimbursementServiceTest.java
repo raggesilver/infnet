@@ -15,9 +15,7 @@ class ReimbursementServiceTest {
     when(authorizerMock.isAuthorized(any(), anyDouble())).thenReturn(true);
 
     var service = new ReimbursementService(calculator, auditSpy, authorizerMock);
-
-    var healthPlan = new StubHealthPlan(0.70);
-    var patient = new Patient("John Doe", "123456", healthPlan);
+    var patient = TestUtils.createPatient();
 
     double result = service.processConsultation(patient, 200.0);
 
@@ -37,9 +35,7 @@ class ReimbursementServiceTest {
     when(authorizerMock.isAuthorized(any(), anyDouble())).thenReturn(false);
 
     var service = new ReimbursementService(calculator, auditSpy, authorizerMock);
-
-    var healthPlan = new StubHealthPlan(0.70);
-    var patient = new Patient("John Doe", "123456", healthPlan);
+    var patient = TestUtils.createPatient();
 
     assertThrows(UnauthorizedReimbursementException.class, () -> {
       service.processConsultation(patient, 200.0);

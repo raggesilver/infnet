@@ -2,8 +2,6 @@ package com.raggesilver.tp2;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -12,9 +10,7 @@ class ConsultationHistoryTest {
   @Test
   void shouldStoreAndRetrieveConsultations() {
     var history = new FakeConsultationHistory();
-    var healthPlan = new StubHealthPlan(0.70);
-    var patient = new Patient("John Doe", "123456", healthPlan);
-    var consultation = new Consultation(patient, 200.0, LocalDateTime.now());
+    var consultation = TestUtils.createConsultation();
 
     history.addConsultation(consultation);
     var consultations = history.getAllConsultations();
@@ -26,14 +22,12 @@ class ConsultationHistoryTest {
   @Test
   void shouldFilterConsultationsByPatient() {
     var history = new FakeConsultationHistory();
-    var healthPlan1 = new StubHealthPlan(0.70);
-    var healthPlan2 = new StubHealthPlan(0.80);
-    var patient1 = new Patient("John Doe", "123456", healthPlan1);
-    var patient2 = new Patient("Jane Smith", "789012", healthPlan2);
+    var patient1 = TestUtils.createPatient("John Doe", "123456", 0.70);
+    var patient2 = TestUtils.createPatient("Jane Smith", "789012", 0.80);
 
-    var consultation1 = new Consultation(patient1, 200.0, LocalDateTime.now());
-    var consultation2 = new Consultation(patient2, 150.0, LocalDateTime.now());
-    var consultation3 = new Consultation(patient1, 300.0, LocalDateTime.now());
+    var consultation1 = TestUtils.createConsultation("John Doe", "123456", 0.70, 200.0);
+    var consultation2 = TestUtils.createConsultation("Jane Smith", "789012", 0.80, 150.0);
+    var consultation3 = TestUtils.createConsultation("John Doe", "123456", 0.70, 300.0);
 
     history.addConsultation(consultation1);
     history.addConsultation(consultation2);
@@ -49,8 +43,7 @@ class ConsultationHistoryTest {
   @Test
   void shouldReturnEmptyListForPatientWithNoConsultations() {
     var history = new FakeConsultationHistory();
-    var healthPlan = new StubHealthPlan(0.70);
-    var patient = new Patient("John Doe", "123456", healthPlan);
+    var patient = TestUtils.createPatient();
 
     var consultations = history.getConsultationsByPatient(patient);
 
