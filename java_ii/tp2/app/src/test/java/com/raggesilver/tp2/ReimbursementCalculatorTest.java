@@ -33,6 +33,7 @@ class ReimbursementCalculatorTest {
 
     double result = calculator.calculateReimbursement(200.0, patient);
 
-    assertEquals(200.0, result);
+    // 100% coverage on R$ 200 should be capped at R$ 150 due to coverage ceiling
+    assertEquals(150.0, result);
   }
 }
