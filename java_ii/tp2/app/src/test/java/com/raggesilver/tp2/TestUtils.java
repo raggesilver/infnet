@@ -22,4 +22,14 @@ public class TestUtils {
     var healthPlan = new StubHealthPlan(coveragePercentage);
     return new Patient(name, id, healthPlan);
   }
+
+  public static void assertEqualsWithMargin(double expected, double actual) {
+    assertEqualsWithMargin(expected, actual, 0.01);
+  }
+
+  public static void assertEqualsWithMargin(double expected, double actual, double margin) {
+    if (Math.abs(expected - actual) > margin) {
+      throw new AssertionError(String.format("Expected <%f> but was <%f> (margin: %f)", expected, actual, margin));
+    }
+  }
 }
