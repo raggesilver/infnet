@@ -6,14 +6,14 @@ namespace TP2.Pages.CountryManager;
 
 public class Index : PageModel
 {
-  [BindProperty] public InputModel Input { get; set; } = new();
+  [BindProperty] public List<InputModel> Input { get; set; } = [];
 
   public string? SuccessMessage { get; set; }
 
   public void OnGet()
   {
-    // Initialize page for GET request
-    Input = new InputModel();
+    // Always initialize with 5 empty InputModels
+    Input = CreateEmptyInputList();
     SuccessMessage = null;
   }
 
@@ -26,18 +26,26 @@ public class Index : PageModel
       return Page();
     }
 
-    var country = new Country
-      { CountryCode = Input.CountryCode, CountryName = Input.CountryName };
+    var countries = Input.Select(input => new Country
+        { CountryCode = input.CountryCode, CountryName = input.CountryName })
+      .ToList();
 
-    SuccessMessage =
-      $"{country.CountryName} ({country.CountryCode}) foi cadastrado com sucesso!";
+    var countryNames =
+      countries.Select(country => country.CountryName).ToList();
 
-    Console.WriteLine(country);
+    SuccessMessage = $"Países cadastrados: {string.Join(", ", countryNames)}";
+
+    Console.WriteLine(countries);
 
     // Reset form
     ModelState.Clear();
-    Input = new InputModel();
+    Input = CreateEmptyInputList();
     return Page();
+  }
+
+  private static List<InputModel> CreateEmptyInputList()
+  {
+    return Enumerable.Range(0, 5).Select(_ => new InputModel()).ToList();
   }
 }
 
