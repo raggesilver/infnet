@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -53,6 +54,11 @@ public class Country
 
 public class InputModel
 {
+  [Required(ErrorMessage = "O nome do país é obrigatório")]
   public string CountryName { get; set; } = string.Empty;
+
+  [Required(ErrorMessage = "O código do país é obrigatório")]
+  [StringLength(2, MinimumLength = 2,
+    ErrorMessage = "O código do país deve ter 2 caracteres")]
   public string CountryCode { get; set; } = string.Empty;
 }
