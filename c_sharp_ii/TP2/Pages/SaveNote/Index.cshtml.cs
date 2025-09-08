@@ -1,14 +1,12 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using static TP2.Constants;
 
 namespace TP2.Pages.SaveNote;
 
 public class Index(IWebHostEnvironment webHostEnvironment) : PageModel
 {
-  private const string NotesDirectory = "data";
-  private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment;
-
   [BindProperty] public InputModel Input { get; set; } = new();
   public string? DownloadLink { get; set; }
 
@@ -21,7 +19,7 @@ public class Index(IWebHostEnvironment webHostEnvironment) : PageModel
     if (!ModelState.IsValid) return Page();
 
     // Get the wwwroot path
-    var wwwRootPath = _webHostEnvironment.WebRootPath;
+    var wwwRootPath = webHostEnvironment.WebRootPath;
     var now = DateTimeOffset.Now.ToUnixTimeSeconds();
     var filePath = Path.Combine(wwwRootPath, NotesDirectory, $"note-{now}.txt");
 

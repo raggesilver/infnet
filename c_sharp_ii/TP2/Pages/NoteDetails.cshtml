@@ -1,0 +1,18 @@
+@page "/Notes/{noteId}"
+@model NoteDetails
+
+@{
+  ViewData["Title"] = "Note Details";
+}
+
+<a asp-page="/Notes">Retornar à todas as notas</a>
+
+@if (Model.Note == null)
+{
+  <h1>Nota não encontrada</h1>
+}
+else
+{
+  <h1>@RouteData.Values["noteId"]</h1>
+  <p>@Model.Note</p>
+}
