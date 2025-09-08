@@ -1,0 +1,55 @@
+@page
+@model Index
+
+@{
+  ViewData["Title"] = "Salvar Nota";
+}
+
+
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="text-center">Salvar Nota</h3>
+        </div>
+        <div class="card-body">
+          @if (Model.DownloadLink != null)
+          {
+            <div class="alert alert-success" role="alert">
+              <h4 class="alert-heading">Sucesso!</h4>
+              <p class="mb-2">Nota salva com sucesso. Faça o download dela
+                através desse link:</p>
+              <a href="@Model.DownloadLink"
+                 download="@Model.DownloadLink.Split('/').Last()"
+                 class="btn btn-outline-success btn-sm">
+                <i class="fas fa-download me-1"></i>
+                Baixar @Model.DownloadLink.Split('/').Last()
+              </a>
+            </div>
+          }
+
+          <form method="post">
+            <div class="form-group mb-3">
+              <label asp-for="Input.Content" class="form-label">Conteúdo da
+                Nota:</label>
+              <textarea asp-for="Input.Content"
+                        class="form-control"
+                        rows="8"
+                        placeholder="Digite o conteúdo da sua nota aqui..."></textarea>
+              <span asp-validation-for="Input.Content"
+                    class="text-danger"></span>
+            </div>
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save me-1"></i>
+                Salvar Nota
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
