@@ -1,0 +1,28 @@
+@page "{cityName?}"
+@model Index
+
+@{
+  var viewingDetails = RouteData.Values["cityName"] != null;
+  ViewData["Title"] = viewingDetails ? "Detalhes da cidade" : "Escolha uma cidade";
+
+  string[] exampleCities = ["Rio de Janeiro", "Uberlândia", "Paris"];
+}
+
+@if (viewingDetails)
+{
+  <div>
+    Você está vendo detalhes de @RouteData.Values["cityName"]
+  </div>
+}
+else
+{
+  <h1>Escolha uma cidade</h1>
+  <ul>
+    @foreach (var city in exampleCities)
+    {
+      <li>
+        <a asp-page="/CityDetails/Index" asp-route-cityName="@city">@city</a>
+      </li>
+    }
+  </ul>
+}

@@ -1,0 +1,47 @@
+@page
+@model Index
+@{
+  ViewData["Title"] = "Cadastrar Cidade Turística";
+}
+
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="text-center">Cadastrar Cidade Turística</h3>
+        </div>
+        <div class="card-body">
+          @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+          {
+            <div class="alert alert-success" role="alert">
+              <h4 class="alert-heading">Sucesso!</h4>
+              <p class="mb-0">@Model.SuccessMessage</p>
+            </div>
+          }
+
+          <form method="post">
+            <div class="form-group mb-3">
+              <label asp-for="Input.CityName" class="form-label">Nome da
+                Cidade:</label>
+              <input asp-for="Input.CityName" class="form-control"
+                     placeholder="Digite o nome da cidade turística (mínimo 3 caracteres)"/>
+              <span asp-validation-for="Input.CityName"
+                    class="text-danger"></span>
+            </div>
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary">Cadastrar Cidade
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@section Scripts {
+  <partial name="_ValidationScriptsPartial"/>
+}
+

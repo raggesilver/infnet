@@ -1,0 +1,14 @@
+@page
+@model Notes
+
+@{
+  ViewData["Title"] = "aaaa";
+}
+
+<h1>Notas</h1>
+<ul>
+  @foreach (var note in Model.NotesList)
+  {
+    <li><a asp-page="/NoteDetails" asp-route-noteId="@note">@note</a></li>
+  }
+</ul>
