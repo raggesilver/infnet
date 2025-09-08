@@ -19,12 +19,21 @@ public class Index : PageModel
 
   public IActionResult OnPost()
   {
-    // Check if the model state is valid based on Data Annotations
-    if (!ModelState.IsValid)
+    // If validation from data annotations failed, don't even try checking
+    // country code rules.
+    if (!ModelState.IsValid) return Page();
+
+    for (var i = 0; i < Input.Count; i++)
     {
-      // Return the page with validation errors
-      return Page();
+      if (Input[i].CountryName.ToLower()[0] !=
+          Input[i].CountryCode.ToLower()[0])
+      {
+        ModelState.AddModelError($"Input[{i}].CountryCode",
+          "O código do país deve começar com a mesma inicial do nome do país");
+      }
     }
+
+    if (!ModelState.IsValid) return Page();
 
     var countries = Input.Select(input => new Country
         { CountryCode = input.CountryCode, CountryName = input.CountryName })
