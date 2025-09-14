@@ -14,8 +14,9 @@ public class Exercise1 implements IExercise {
       var response = http.get("https://apichallenges.eviltester.com/sim/entities");
       System.out.println("Status: " + response.statusCode);
       System.out.println(response.body);
+      System.out.println();
     } catch (Exception e) {
-      System.err.println("Erro ao obter dados do servidor: " + e.getMessage());
+      System.out.println("Erro ao obter dados do servidor: " + e.getMessage());
     }
   }
 }
