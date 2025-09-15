@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CityBreaks.Web.Models;
 
-public class City
+public class Property
 {
   [Key]
   [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -11,9 +11,9 @@ public class City
 
   [Required] public required string Name { get; set; }
 
-  public int CountryId { get; set; }
+  [Required] public decimal PricePerNight { get; set; }
 
-  public Country Country { get; set; }
+  [Required] public int CityId { get; set; }
 
-  public List<Property> Properties { get; set; }
+  public City City { get; set; }
 }
