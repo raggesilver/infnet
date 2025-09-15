@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.Map;
 
 public class HttpService {
@@ -65,6 +66,9 @@ public class HttpService {
     return this.makeRequest(url, "DELETE", null, null);
   }
 
+  public HttpServiceResponse options(String url) throws Exception {
+    return this.makeRequest(url, "OPTIONS", null, new HashMap<>());
+  }
 
   private static @Nullable String readResponse(@NotNull HttpURLConnection connection) throws Exception {
     // Ignore an empty body
