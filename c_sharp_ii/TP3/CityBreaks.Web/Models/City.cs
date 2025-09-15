@@ -3,15 +3,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CityBreaks.Web.Models;
 
-public class Country
+public class City
 {
   [Key]
   [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
   public int Id { get; set; }
 
-  [Required] public string CountryName { get; set; }
+  [Required]
+  public required string Name { get; set; }
 
-  [Required] public string CountryId { get; set; }
+  public int CountryId { get; set; }
 
-  public List<City> Cities { get; set; }
+  public Country Country { get; set; }
 }
