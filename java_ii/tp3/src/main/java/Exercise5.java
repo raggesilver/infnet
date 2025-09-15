@@ -17,8 +17,7 @@ public class Exercise5 implements IExercise {
       // Nos meus testes, o ID criado é 11.
       // Status: 201
       // {"id":11,"name":"bob","description":""}
-      System.out.println("Status: " + response.statusCode + (response.isError() ? " (ERRO)" : ""));
-      System.out.println(response.body);
+      System.out.println(response);
       System.out.println();
     } catch (Exception e) {
       System.out.println("Erro ao obter dados do servidor: " + e.getMessage());

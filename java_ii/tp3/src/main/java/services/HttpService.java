@@ -113,5 +113,20 @@ public class HttpService {
     public boolean isError() {
       return this.statusCode >= 400;
     }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder();
+      sb.append(connection.getRequestMethod()).append(" ").append(connection.getURL()).append("\n");
+      sb.append("Status: ").append(statusCode);
+      if (isError()) {
+        sb.append(" (ERRO)");
+      }
+      sb.append("\n");
+      if (body != null) {
+        sb.append(body);
+      }
+      return sb.toString();
+    }
   }
 }
