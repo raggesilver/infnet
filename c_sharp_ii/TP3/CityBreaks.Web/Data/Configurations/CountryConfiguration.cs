@@ -12,5 +12,10 @@ public class CountryConfiguration : IEntityTypeConfiguration<Country>
     // usar .HasColumnName().
     builder.Property(c => c.CountryName)
       .HasMaxLength(100);
+
+    builder.HasData(
+      new Country { Id = 1, CountryName = "Brasil", CountryId = "BR" },
+      new Country { Id = 2, CountryName = "Canada", CountryId = "CA" }
+    );
   }
 }

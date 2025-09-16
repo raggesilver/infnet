@@ -14,8 +14,8 @@ public class CityBreaksContext(DbContextOptions<CityBreaksContext> options)
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
     modelBuilder.ApplyConfiguration(new CountryConfiguration());
-    modelBuilder.ApplyConfiguration(new PropertyConfiguration());
     modelBuilder.ApplyConfiguration(new CityConfiguration());
+    modelBuilder.ApplyConfiguration(new PropertyConfiguration());
 
     base.OnModelCreating(modelBuilder);
   }

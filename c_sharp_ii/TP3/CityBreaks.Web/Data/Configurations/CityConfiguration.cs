@@ -15,5 +15,10 @@ public class CityConfiguration : IEntityTypeConfiguration<City>
     // de cidades, mas achei cabível de fazer.
     builder.Property(c => c.Name)
       .HasMaxLength(100);
+
+    builder.HasData(
+      new City { Id = 1, Name = "Uberlândia", CountryId = 1 },
+      new City { Id = 2, Name = "Ottawa", CountryId = 2 }
+    );
   }
 }

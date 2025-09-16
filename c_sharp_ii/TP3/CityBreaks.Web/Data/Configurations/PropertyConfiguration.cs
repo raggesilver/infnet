@@ -12,5 +12,12 @@ public class PropertyConfiguration : IEntityTypeConfiguration<Property>
     // usar .HasColumnName().
     builder.Property(c => c.Name)
       .HasMaxLength(100);
+
+    builder.HasData(
+      new Property
+        { Id = 1, Name = "Ibis Hotel", PricePerNight = 200, CityId = 1 },
+      new Property
+        { Id = 2, Name = "Plaza Hotel", PricePerNight = 579, CityId = 2 }
+    );
   }
 }
