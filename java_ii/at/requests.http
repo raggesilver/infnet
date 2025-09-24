@@ -1,0 +1,18 @@
+@baseUrl = http://localhost:7119
+
+###
+GET {{baseUrl}}/hello
+
+###
+GET {{baseUrl}}/status
+
+###
+GET {{baseUrl}}/echo
+Content-Type: application/json
+
+{
+  "message": "Hello, World!"
+}
+
+###
+GET {{baseUrl}}/saudacao/João Silva
