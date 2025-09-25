@@ -9,5 +9,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface Route {
   String path() default "/"; // The path parameter
+
   String verb() default "GET"; // Optional HTTP method, defaults to GET
 }
