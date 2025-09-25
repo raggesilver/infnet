@@ -28,13 +28,11 @@ public class Hello extends Router {
     ctx.json(response);
   }
 
-  @Route(path = "echo")
+  @Route(path = "echo", verb = "POST")
   static public void echo(Context ctx) {
-    var req = ctx.bodyAsClass(MessageDto.class);
+    var data = parseAndValidate(ctx.body(), MessageDto.class);
 
-    validateOrThrow(req);
-
-    ctx.json(req);
+    ctx.json(data);
   }
 
   @Route(path = "saudacao/{nome}")

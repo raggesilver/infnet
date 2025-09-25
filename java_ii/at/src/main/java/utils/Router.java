@@ -2,6 +2,7 @@ package utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import io.javalin.Javalin;
 import io.javalin.http.Handler;
 import io.javalin.http.HttpResponseException;
@@ -21,7 +22,7 @@ public abstract class Router {
   protected static final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
   protected static final Validator validator = factory.getValidator();
 
-  static protected void validateOrThrow(Object object) {
+  static private void validateOrThrow(Object object) {
     var violations = validator.validate(object);
 
     if (!violations.isEmpty()) {
@@ -38,6 +39,41 @@ public abstract class Router {
         throw new InternalServerErrorResponse("Failed to serialize validation errors to JSON");
       }
     }
+  }
+
+  static protected <T> T parseAndValidate(String json, Class<T> clazz) {
+    ObjectMapper mapper = new ObjectMapper();
+    T object;
+
+    try {
+      object = mapper.readValue(json, clazz);
+    } catch (InvalidFormatException e) {
+      // Convert Jackson errors to validation-like errors
+      Map<String, String> errors = new HashMap<>();
+      errors.put("json", "Invalid format: " + e.getMessage());
+
+      try {
+        var jsonError = mapper.writeValueAsString(errors);
+        throw new HttpResponseException(400, jsonError, Map.of("Content-Type", "application/json; charset=utf-8"));
+      } catch (JsonProcessingException ex) {
+        logger.error("Failed to serialize validation errors to JSON", ex);
+        throw new InternalServerErrorResponse("Failed to serialize validation errors to JSON");
+      }
+    } catch (JsonProcessingException e) {
+      Map<String, String> errors = new HashMap<>();
+      errors.put("json", "Invalid JSON: " + e.getMessage());
+
+      try {
+        var jsonError = mapper.writeValueAsString(errors);
+        throw new HttpResponseException(400, jsonError, Map.of("Content-Type", "application/json; charset=utf-8"));
+      } catch (JsonProcessingException ex) {
+        logger.error("Failed to serialize validation errors to JSON", ex);
+        throw new InternalServerErrorResponse("Failed to serialize validation errors to JSON");
+      }
+    }
+
+    validateOrThrow(object);
+    return object;
   }
 
   static public void registerRoutes(Javalin app, Class<?> clazz) {
