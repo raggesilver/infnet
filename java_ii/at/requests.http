@@ -1,0 +1,34 @@
+@baseUrl = http://localhost:7119
+
+###
+GET {{baseUrl}}/hello
+
+###
+GET {{baseUrl}}/status
+
+###
+POST {{baseUrl}}/echo
+Content-Type: application/json
+
+{
+  "message": "Hello, World!"
+}
+
+###
+GET {{baseUrl}}/saudacao/João Silva
+
+
+### Get all mensalists
+GET {{baseUrl}}/mensalists
+
+### Create a new mensalist
+POST {{baseUrl}}/mensalists
+Content-Type: application/json
+
+{
+  "name": "Paulo",
+  "salary": 20000.00
+}
+
+### Get a single mensalist
+GET {{baseUrl}}/mensalists/a7b55349-78c7-4caf-ad10-32f9cc18896a
