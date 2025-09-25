@@ -17,6 +17,20 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+// Desde a introdução do Javalin à nossa turma, achei a ideia de listar todos os
+// end-points, um por um, no main (ou em qualquer lugar onde fizéssemos a
+// inicialização do app Javalin) me parecia muito aglomerada e difícil de ler.
+//
+// Decidi então criar uma classe base, Router, responsável por três coisas:
+// 1. registrar todos os seus métodos marcados com a anotação @Route no app
+//    Javalin
+// 2. ao registrar os métodos, cuidar para que quaisquer erros oriundos das
+//    execuções dos métodos resultem em uma resposta HTTP apropriada sendo
+//    enviada ao usuário
+// 3. facilitar o registro de métodos com um prefixo
+//
+// As anotações BasePath e Route foram criadas para tornar isso possível.
+
 public abstract class Router {
   private static final Logger logger = LoggerFactory.getLogger(Router.class);
   protected static final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();

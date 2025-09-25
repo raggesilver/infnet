@@ -13,6 +13,7 @@ class MessageDto {
   public String message;
 }
 
+// Favor ler comentários na implementação da classe Router (src/main/java/utils/Router.java)
 public class Hello extends Router {
   @Route(path = "hello")
   static public void hello(Context ctx) {

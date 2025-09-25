@@ -3,8 +3,10 @@ import io.javalin.Javalin;
 public class Main {
   public static Javalin getApp() {
     var app = Javalin.create();
-    Hello.registerRoutes(app, Hello.class);
-    Mensalists.registerRoutes(app, Mensalists.class);
+    // Endpoints foram criados em classes separadas para facilitar a manutenção
+    // e legibilidade.
+    Hello.registerRoutes(app, Hello.class); // Rúbrica 1
+    Mensalists.registerRoutes(app, Mensalists.class); // Rúbrica 4
     return app;
   }
 

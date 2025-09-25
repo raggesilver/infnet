@@ -7,6 +7,8 @@ import utils.HttpRequestBuilder;
 import java.util.ArrayList;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class MainTest {
   private static Javalin app;
   private static final int TEST_PORT = 7120; // Different port for tests
@@ -39,9 +41,9 @@ public class MainTest {
 
     System.out.println(result.response);
 
-    assert result.response.statusCode == 200;
-    assert result.response.body != null;
-    assert result.response.body.equals("Hello World!");
+    assertEquals(200, result.response.statusCode);
+    assertNotNull(result.response.body);
+    assertEquals("Hello World!", result.response.body);
   }
 
   @Test
@@ -53,13 +55,13 @@ public class MainTest {
 
     System.out.println(result.response);
 
-    assert result.response.statusCode == 201;
-    assert result.response.headers.containsKey("Content-Type");
-    assert result.response.headers.get("Content-Type").startsWith("application/json");
+    assertEquals(201, result.response.statusCode);
+    assertTrue(result.response.headers.containsKey("Content-Type"));
+    assertTrue(result.response.headers.get("Content-Type").startsWith("application/json"));
 
     var responseData = result.response.json();
-    assert responseData.get("name").equals("John");
-    assert responseData.get("salary").equals(1000.0);
+    assertEquals("John", responseData.get("name"));
+    assertEquals(1000.0, responseData.get("salary"));
   }
 
   @Test
@@ -79,9 +81,9 @@ public class MainTest {
 
     System.out.println(result.response);
 
-    assert result.response.statusCode == 200;
-    assert result.response.body != null;
-    assert result.response.json().get("id").equals(newMensalistId);
+    assertEquals(200, result.response.statusCode);
+    assertNotNull(result.response.body);
+    assertEquals(newMensalistId, result.response.json().get("id"));
   }
 
   @Test
@@ -96,9 +98,8 @@ public class MainTest {
         .post()
         .sendJson(data);
 
-      assert result.response.statusCode == 201;
+      assertEquals(201, result.response.statusCode);
     }
-
 
     // Listar todos os mensalistas.
     var result = HttpRequestBuilder.url("http://localhost:7120/mensalists")
@@ -107,13 +108,13 @@ public class MainTest {
 
     System.out.println(result.response);
 
-    assert result.response.statusCode == 200;
-    assert result.response.body != null;
+    assertEquals(200, result.response.statusCode);
+    assertNotNull(result.response.body);
 
     var responseData = result.response.jsonListOfMaps();
 
     System.out.println(responseData);
 
-    assert responseData.size() == 2;
+    assertEquals(2, responseData.size());
   }
 }

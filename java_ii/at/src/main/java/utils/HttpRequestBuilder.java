@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
 
-// Assim como o professor fez em aula
+// Assim como o professor fez em aula, decidi criar um wrapper para facilitar
+// o uso do HttpURLConnection para fazer pedidos HTTP. HttpRequestBuilder é uma
+// extensão do wrapper que eu havia criado para o TP 3.
 
 public class HttpRequestBuilder {
   private static final ObjectMapper objectMapper = new ObjectMapper();
