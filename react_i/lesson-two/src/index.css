@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+  --color-foreground: oklch(21% 0.006 285.885); /* zinc-900 */
+  --color-background: oklch(98.5% 0 0); /* zinc-50 */
+  --color-border: oklch(from var(--color-foreground) l c h / 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-foreground: oklch(98.5% 0 0); /* zinc-50 */
+    --color-background: oklch(21% 0.006 285.885); /* zinc-900 */
+    --color-border: oklch(from var(--color-foreground) l c h / 0.1);
+  }
+}
+
+* {
+  box-sizing: border-box;
+  border-color: var(--color-border);
+}
+
+body,
+html {
+  @apply bg-background text-foreground;
+
+  margin: 0;
+  padding: 0;
+}
