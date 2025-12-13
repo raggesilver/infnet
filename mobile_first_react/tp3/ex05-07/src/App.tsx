@@ -1,12 +1,13 @@
 import "./App.css";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
+import { Main } from "./Main";
 
 function App() {
   return (
     <>
       <Header />
-      <main style={{ minHeight: "300px" }}>Main goes here</main>
+      <Main />
       <Footer />
     </>
   );
