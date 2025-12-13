@@ -1,0 +1,70 @@
+<!--Crie um layout complexo envolvendo o uso de flexbox nos elementos, adotando a abordagem mobile-first e garantindo que a página seja responsiva e adaptável a resolução de tablet e desktop.
+
+Trabalhe com um arquivo html para estrutura, um arquivo css para estilização e um arquivo javascript para resposta a interação do menu.
+Sua página deve conter os seguintes elementos principais:
+Cabeçalho (Header): Um cabeçalho contendo uma barra de navegação, com links para as seções "Início", "Serviços", "Sobre" e "Contato". Estes links apontam para seções na própria página.
+Main Content: Uma seção principal main que conterá três colunas:
+Coluna Esquerda: Uma coluna com links de navegação adicionais ou informações adicionais.
+Coluna Central: Uma área de conteúdo principal onde você pode colocar um texto ou imagens.
+Coluna Direita: Uma coluna que pode conter widgets ou informações secundárias.
+Rodapé (Footer): Um rodapé com informações de direitos autorais e links para redes sociais.
+Estilização Mobile-First (CSS):
+No arquivo CSS, aplique a abordagem mobile-first, começando pelos estilos para telas pequenas (smartphones):
+Estilo para Navbar: A navbar deve ser exibida verticalmente (links empilhados) para telas pequenas.
+Layout de Colunas: Para telas pequenas, as três colunas do main devem ser exibidas em uma única coluna (empilhadas verticalmente).
+Espaçamento: Adicione espaçamento (padding) para que os elementos não fiquem colados uns aos outros. Opcionalmente, você poderá usar as propriedades de gap.-->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mobile First Example</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+</html>
+<body>
+  <!--Header-->
+  <header id="inicio">
+    <nav>
+      <a href="#inicio">Início</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </header>
+
+  <!--Main Content-->
+  <main>
+    <section class="coluna-esquerda">
+      <h2>Navegação Adicional</h2>
+      <ul>
+        <li><a href="#">Link 1</a></li>
+        <li><a href="#">Link 2</a></li>
+        <li><a href="#">Link 3</a></li>
+      </ul>
+    </section>
+
+    <section class="coluna-central">
+      <h1>Bem-vindo ao Nosso Site</h1>
+      <p>
+        Este é o conteúdo principal da página. Aqui você pode adicionar textos,
+        imagens e outros elementos relevantes.
+      </p>
+    </section>
+
+    <section class="coluna-direita">
+      <h2>Widgets</h2>
+      <p>Informações secundárias ou widgets podem ser colocados aqui.</p>
+    </section>
+  </main>
+
+  <footer>
+    <a href="https://github.com/raggesilver" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/paulovi-queiroz/" target="_blank"
+      >LinkedIn</a
+    >
+    <a href="https://mastodon.social/@raggesilver" target="_blank">Mastodon</a>
+    &copy; 2025 Queiroz, Paulo.
+  </footer>
+</body>
