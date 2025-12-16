@@ -1,0 +1,7 @@
+export default function Header() {
+  return (
+    <header>
+      <h1>Gestão de Produtos</h1>
+    </header>
+  );
+}
