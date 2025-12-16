@@ -8,7 +8,8 @@ body {
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
     "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  background-color: #f5f5f5;
+  background-color: #232323;
+  color: #fafafa;
 }
 
 .App {
@@ -18,12 +19,13 @@ body {
 }
 
 header {
-  background-color: #2c3e50;
-  color: white;
+  background-color: #1a1a1a;
+  color: #fafafa;
   padding: 20px;
   text-align: center;
   border-radius: 8px;
   margin-bottom: 30px;
+  border: 1px solid #333;
 }
 
 header h1 {
@@ -37,13 +39,14 @@ header h1 {
 }
 
 .feedback-message {
-  background-color: #4caf50;
-  color: white;
+  background-color: #2a7a3f;
+  color: #fafafa;
   padding: 15px;
   border-radius: 4px;
   text-align: center;
   margin-bottom: 20px;
   animation: slideIn 0.3s ease-out;
+  border: 1px solid #3a9a5f;
 }
 
 @keyframes slideIn {
@@ -58,15 +61,16 @@ header h1 {
 }
 
 .product-form {
-  background-color: white;
+  background-color: #2a2a2a;
   padding: 25px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: 1px solid #3a3a3a;
 }
 
 .product-form h2 {
   margin-bottom: 20px;
-  color: #2c3e50;
+  color: #fafafa;
 }
 
 .product-form div {
@@ -77,20 +81,26 @@ header h1 {
   display: block;
   margin-bottom: 5px;
   font-weight: 600;
-  color: #555;
+  color: #d0d0d0;
 }
 
 .product-form input {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #444;
   border-radius: 4px;
   font-size: 14px;
+  background-color: #1a1a1a;
+  color: #fafafa;
 }
 
 .product-form input:focus {
   outline: none;
-  border-color: #3498db;
+  border-color: #5a9fd4;
+}
+
+.product-form input::placeholder {
+  color: #666;
 }
 
 .form-buttons {
@@ -100,8 +110,8 @@ header h1 {
 
 .product-form button {
   padding: 10px 20px;
-  background-color: #3498db;
-  color: white;
+  background-color: #4a7ba7;
+  color: #fafafa;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -110,49 +120,57 @@ header h1 {
 }
 
 .product-form button:hover {
-  background-color: #2980b9;
+  background-color: #5a9fd4;
 }
 
 .product-form button[type="button"] {
-  background-color: #95a5a6;
+  background-color: #555;
 }
 
 .product-form button[type="button"]:hover {
-  background-color: #7f8c8d;
+  background-color: #666;
 }
 
 .search-container {
-  background-color: white;
+  background-color: #2a2a2a;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: 1px solid #3a3a3a;
 }
 
 .search-container label {
   display: block;
   margin-bottom: 8px;
   font-weight: 600;
-  color: #555;
+  color: #d0d0d0;
 }
 
 .search-container input {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #444;
   border-radius: 4px;
   font-size: 14px;
+  background-color: #1a1a1a;
+  color: #fafafa;
 }
 
 .search-container input:focus {
   outline: none;
-  border-color: #3498db;
+  border-color: #5a9fd4;
+}
+
+.search-container input::placeholder {
+  color: #666;
 }
 
 .product-list {
-  background-color: white;
+  background-color: #2a2a2a;
   padding: 25px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: 1px solid #3a3a3a;
   overflow-x: auto;
 }
 
@@ -162,23 +180,25 @@ table {
 }
 
 thead {
-  background-color: #34495e;
-  color: white;
+  background-color: #1a1a1a;
+  color: #fafafa;
 }
 
 th {
   padding: 12px;
   text-align: left;
   font-weight: 600;
+  border-bottom: 2px solid #444;
 }
 
 td {
   padding: 12px;
-  border-bottom: 1px solid #ecf0f1;
+  border-bottom: 1px solid #3a3a3a;
+  color: #fafafa;
 }
 
 tbody tr:hover {
-  background-color: #f8f9fa;
+  background-color: #333;
 }
 
 tbody tr:last-child td {
