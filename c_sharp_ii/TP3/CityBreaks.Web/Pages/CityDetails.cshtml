@@ -1,0 +1,123 @@
+@page "/city/{name}"
+@model CityDetailsModel
+@{
+  ViewData["Title"] = $"Detalhes de {Model.City?.Name}";
+}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a asp-page="/Index">Home</a></li>
+          <li class="breadcrumb-item active"
+              aria-current="page">@Model.City?.Name</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  @if (Model.City != null)
+  {
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h1 class="card-title mb-0">@Model.City.Name</h1>
+            <p class="text-muted mb-0">@Model.City.Country?.CountryName</p>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <h4>Informações da Cidade</h4>
+                <dl class="row">
+                  <dt class="col-sm-4">Nome:</dt>
+                  <dd class="col-sm-8">@Model.City.Name</dd>
+
+                  <dt class="col-sm-4">País:</dt>
+                  <dd class="col-sm-8">@Model.City.Country?.CountryName</dd>
+
+                  <dt class="col-sm-4">ID da Cidade:</dt>
+                  <dd class="col-sm-8">@Model.City.Id</dd>
+                </dl>
+              </div>
+              <div class="col-md-6">
+                <h4>Estatísticas</h4>
+                <dl class="row">
+                  <dt class="col-sm-6">Total de Propriedades:</dt>
+                  <dd class="col-sm-6">
+                    <span
+                      class="badge bg-primary">@Model.City.Properties?.Count</span>
+                  </dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    @if (Model.City.Properties != null && Model.City.Properties.Any())
+    {
+      <div class="row mt-4">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title mb-0">Propriedades Disponíveis</h3>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                @foreach (var property in Model.City.Properties)
+                {
+                  <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                      <div class="card-body">
+                        <h5 class="card-title">@property.Name</h5>
+                        <p class="card-text">@property.Name</p>
+                        <div
+                          class="d-flex justify-content-between align-items-center">
+                                                    <span
+                                                      class="badge bg-success">
+                                                        @property.PricePerNight.ToString("C")
+                                                    </span>
+                          <small class="text-muted">por noite</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+    else
+    {
+      <div class="row mt-4">
+        <div class="col-md-12">
+          <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">Nenhuma propriedade encontrada</h4>
+            <p>Não há propriedades disponíveis para esta cidade no momento.</p>
+          </div>
+        </div>
+      </div>
+    }
+  }
+  else
+  {
+    <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-danger" role="alert">
+          <h4 class="alert-heading">Cidade não encontrada</h4>
+          <p>A cidade "@Model.CityName" não foi encontrada em nosso sistema.</p>
+          <hr>
+          <p class="mb-0">
+            <a asp-page="/Index" class="btn btn-primary">Voltar para a página
+              inicial</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  }
+</div>
