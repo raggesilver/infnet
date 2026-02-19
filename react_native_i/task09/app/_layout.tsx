@@ -14,7 +14,7 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen
           name="index"
-          options={{ title: "TP1 — React Native I" }}
+          options={{ title: "TP1 — Paulo Queiroz" }}
         />
         <Stack.Screen
           name="task09"
