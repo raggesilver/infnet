@@ -5,7 +5,7 @@ on:
   push:
     paths:
       - "package.json"
-      - "bun.lockb"
+      - "bun.lock"
       - "packages/not-jquery/**"
 
   pull_request:
