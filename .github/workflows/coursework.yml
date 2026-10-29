@@ -1,0 +1,93 @@
+name: Coursework CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "java_i*/**"
+      - "c_sharp_i*/**"
+      - "block_iii*/**"
+      - ".github/workflows/coursework.yml"
+      - ".github/scripts/changed-units.sh"
+  pull_request:
+    paths:
+      - "java_i*/**"
+      - "c_sharp_i*/**"
+      - "block_iii*/**"
+      - ".github/workflows/coursework.yml"
+      - ".github/scripts/changed-units.sh"
+
+concurrency:
+  group: coursework-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      units: ${{ steps.detect.outputs.units }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: detect
+        env:
+          BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          # Editing the CI itself rebuilds everything, to validate the change.
+          if git diff --name-only "$BASE" "$HEAD_SHA" 2>/dev/null | grep -qE '^\.github/(workflows/coursework\.yml|scripts/)'; then
+            export ALL=1
+          fi
+          echo "units=$(.github/scripts/changed-units.sh)" >> "$GITHUB_OUTPUT"
+
+  build:
+    needs: changes
+    if: needs.changes.outputs.units != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        unit: ${{ fromJSON(needs.changes.outputs.units) }}
+    name: ${{ matrix.unit.dir }} (${{ matrix.unit.kind }})
+    steps:
+      - uses: actions/checkout@v4
+
+      - if: matrix.unit.kind == 'dotnet'
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+      - if: matrix.unit.kind == 'dotnet'
+        env:
+          DIR: ${{ matrix.unit.dir }}
+        run: |
+          targets=$(find "$DIR" -maxdepth 3 -name '*.sln')
+          [ -n "$targets" ] || targets=$(find "$DIR" -name '*.csproj' -not -path '*/obj/*')
+          for target in $targets; do
+            dotnet test "$target" --configuration Release
+          done
+
+      - if: matrix.unit.kind != 'dotnet'
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 24
+          cache: ${{ matrix.unit.kind == 'maven' && 'maven' || matrix.unit.kind == 'gradle' && 'gradle' || '' }}
+          cache-dependency-path: |
+            ${{ matrix.unit.dir }}/**/*.gradle*
+            ${{ matrix.unit.dir }}/**/gradle-wrapper.properties
+            ${{ matrix.unit.dir }}/**/pom.xml
+      - if: matrix.unit.kind == 'javac'
+        env:
+          DIR: ${{ matrix.unit.dir }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/out"
+          javac -encoding UTF-8 -d "$RUNNER_TEMP/out" $(find "$DIR/src" -name '*.java')
+      - if: matrix.unit.kind == 'gradle'
+        working-directory: ${{ matrix.unit.dir }}
+        run: ./gradlew --no-daemon build
+      - if: matrix.unit.kind == 'maven'
+        run: mvn -B -ntp -f "${{ matrix.unit.dir }}/pom.xml" verify
