@@ -8,14 +8,14 @@ on:
       - "c_sharp_i*/**"
       - "block_iii*/**"
       - ".github/workflows/coursework.yml"
-      - ".github/scripts/changed-units.sh"
+      - ".github/scripts/**"
   pull_request:
     paths:
       - "java_i*/**"
       - "c_sharp_i*/**"
       - "block_iii*/**"
       - ".github/workflows/coursework.yml"
-      - ".github/scripts/changed-units.sh"
+      - ".github/scripts/**"
 
 concurrency:
   group: coursework-${{ github.ref }}
@@ -84,8 +84,14 @@ jobs:
         env:
           DIR: ${{ matrix.unit.dir }}
         run: |
-          mkdir -p "$RUNNER_TEMP/out"
-          javac -encoding UTF-8 -d "$RUNNER_TEMP/out" $(find "$DIR/src" -name '*.java')
+          failed=0
+          while IFS= read -r root; do
+            out="$RUNNER_TEMP/$(echo "$root" | tr / _)"
+            mkdir -p "$out"
+            echo "Compilando $root"
+            javac -encoding UTF-8 -d "$out" $(.github/scripts/java-sources.sh files "$root") || failed=1
+          done < <(.github/scripts/java-sources.sh roots "$DIR")
+          exit $failed
       - if: matrix.unit.kind == 'gradle'
         working-directory: ${{ matrix.unit.dir }}
         run: ./gradlew --no-daemon build

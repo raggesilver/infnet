@@ -13,7 +13,7 @@ unit_kind() {
   if [ -f "$dir/pom.xml" ]; then echo maven
   elif [ -f "$dir/gradlew" ]; then echo gradle
   elif [ -n "$(find "$dir" -maxdepth 3 \( -name '*.sln' -o -name '*.csproj' \) -print -quit)" ]; then echo dotnet
-  elif [ -d "$dir/src" ] && [ -n "$(find "$dir/src" -name '*.java' -print -quit)" ]; then echo javac
+  elif [ -n "$("$(dirname "$0")/java-sources.sh" roots "$dir")" ]; then echo javac
   fi
 }
 
