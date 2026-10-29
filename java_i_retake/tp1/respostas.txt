@@ -1,0 +1,127 @@
+TP1 — Fundamentos de Desenvolvimento com Java
+Paulo Queiroz
+
+
+Exercício 1
+===========
+
+Programa: ex01/InfoAmbiente.java
+
+Comandos usados no terminal, de dentro da pasta ex01:
+
+  javac InfoAmbiente.java
+  java InfoAmbiente
+
+
+Exercício 2
+===========
+
+O javac não gera código de máquina: ele traduz o código-fonte (.java) em bytecode, um
+conjunto de instruções intermediárias, independente de processador e de sistema operacional,
+gravado no arquivo .class. Já o comando java não compila nada: ele inicia a JVM (Java
+Virtual Machine), que carrega o .class, verifica o bytecode e o executa, interpretando as
+instruções e compilando para código nativo os trechos mais usados (JIT). Cada sistema
+operacional tem sua própria implementação da JVM, mas todas entendem o mesmo bytecode e
+oferecem as mesmas chamadas, como System.getProperty. Por isso o InfoAmbiente.class gerado
+no Windows rodou no Linux sem recompilação: o que muda entre as máquinas é a JVM, não o
+.class, e o programa só mostrou valores diferentes porque leu o ambiente de cada uma.
+
+
+Exercício 3
+===========
+
+Sessão do JShell aberta pelo terminal com o comando "jshell":
+
+jshell> int idade = 30
+idade ==> 30
+
+jshell> double altura = 1.75
+altura ==> 1.75
+
+jshell> boolean ativo = true
+ativo ==> true
+
+jshell> idade + 5
+$4 ==> 35
+
+jshell> idade * altura
+$5 ==> 52.5
+
+jshell> altura - 0.25
+$6 ==> 1.5
+
+jshell> idade % 4
+$7 ==> 2
+
+jshell> idade > 18
+$8 ==> true
+
+jshell> altura <= 1.5
+$9 ==> false
+
+jshell> /exit
+
+
+Exercício 4
+===========
+
+1. Trecho escrito sem IA (5 a 10 linhas):
+
+   public class Main {
+     public static void main(String[] args) {
+       String name = System.console().readLine("Digite o seu nome: ");
+       System.out.println("Olá " + name + "!");
+     }
+   }
+
+2. Explicação linha por linha recebida da IA (Claude Code):
+
+   Linha 1, "public class Main {": declara a classe pública Main. Em Java, uma
+   classe pública precisa estar em um arquivo com o mesmo nome (Main.java).
+
+   Linha 2, "public static void main(String[] args) {": é o ponto de entrada do
+   programa, o método que a JVM procura ao executar a classe. "public" permite
+   que a JVM o chame de fora da classe, "static" permite chamá-lo sem criar um
+   objeto, "void" indica que ele não devolve valor e "String[] args" recebe os
+   argumentos passados na linha de comando.
+
+   Linha 3, "String name = System.console().readLine("Digite o seu nome: ");":
+   System.console() obtém o console associado ao terminal. O método readLine
+   exibe o texto recebido como prompt, espera o usuário digitar e apertar ENTER
+   e devolve o que foi digitado, sem a quebra de linha. Esse texto fica guardado
+   na variável name, do tipo String. Um ponto de atenção: em versões até o
+   JDK 21, System.console() devolve null quando o programa não está ligado a um
+   terminal interativo (por exemplo, quando a entrada ou a saída é
+   redirecionada, ou ao rodar em algumas IDEs), e a chamada a readLine lança
+   NullPointerException. Em versões mais novas (testado no JDK 24) isso não
+   acontece com entrada redirecionada.
+
+   Linha 4, "System.out.println("Olá " + name + "!");": o operador + concatena
+   as strings "Olá ", o conteúdo de name e "!", e println escreve o resultado
+   na saída padrão, seguido de uma quebra de linha. Se o usuário digitar "Ana",
+   a saída será "Olá Ana!".
+
+   Linhas 5 e 6: fecham o método main e a classe Main.
+
+3. Avaliação da explicação:
+
+   O código é simples, não tenho observações a acrescentar sobre a explicação.
+
+4. Tecnologia emergente incorporada ao ecossistema Java:
+
+   O ecossistema Java tem incorporado a IA generativa tanto nas ferramentas de
+   desenvolvimento quanto nas aplicações: o IntelliJ IDEA traz assistentes de
+   IA integrados, como o AI Assistant e o agente Junie, que também podem se
+   conectar a servidores MCP (Model Context Protocol). No lado das aplicações,
+   o Spring AI oferece templates para o Spring Boot que permitem a uma
+   aplicação consumir ou expor ferramentas via MCP, para que modelos de
+   linguagem as chamem de forma padronizada. Com isso, o assistente deixa de
+   ser só um autocompletar e passa a atuar sobre o projeto e sobre os sistemas
+   em que ele se integra.
+
+
+Exercício 9
+===========
+
+O comentário de cabeçalho sobre o uso de IA generativa fica no arquivo
+ex09/MenuLogistica.java.
