@@ -1,0 +1,75 @@
+Exercício 1 — Ambiente
+
+O SDK .NET já estava instalado. O comando dotnet --version retornou 10.0.402.
+O Visual Studio Community e seu depurador não foram verificados nesta máquina.
+O projeto foi criado com dotnet new console -n AmbienteEstacionamento,
+informando também o diretório de saída e o framework net10.0.
+
+No diretório AmbienteEstacionamento, o comando exato executado foi:
+DOTNET_CLI_HOME=/tmp/infnet-dotnet dotnet run
+
+Saída obtida:
+Sistema operacional: Unix 27.0.1
+Versão do .NET: 10.0.13
+Diretório de trabalho: /Users/paulo/Projects/infnet/c_sharp_i_retake/tp1/AmbienteEstacionamento
+
+DOTNET_CLI_HOME direciona os arquivos de usuário do CLI para um diretório
+temporário acessível neste ambiente; não altera a lógica do programa.
+
+Exercício 2 — Portabilidade
+
+O compilador C# transforma o código-fonte em IL (Intermediate Language),
+uma representação intermediária armazenada em um assembly, junto a metadados.
+Essa IL não é o código de máquina específico de Windows ou Linux.
+Em cada sistema, uma implementação compatível do runtime .NET carrega o assembly.
+O CLR gerencia a execução e usa o compilador JIT para traduzir os métodos em IL
+para código de máquina adequado à arquitetura durante a execução.
+A CPU executa esse código nativo produzido pelo JIT, não a IL diretamente.
+Assim, o mesmo assembly pode funcionar nos dois sistemas quando o runtime e
+as dependências são compatíveis e o programa evita recursos específicos do SO.
+
+Exercício 3 — Compilação e execução
+
+Após DOTNET_CLI_HOME=/tmp/infnet-dotnet dotnet build, bin/Debug/net10.0 contém:
+- AmbienteEstacionamento.dll: assembly com IL e metadados do programa.
+- AmbienteEstacionamento.pdb: símbolos usados para depuração.
+- AmbienteEstacionamento.deps.json: informações das dependências da aplicação.
+- AmbienteEstacionamento.runtimeconfig.json: framework e configurações do runtime.
+- AmbienteEstacionamento: executável nativo de inicialização gerado nesta máquina.
+
+O SDK reúne as ferramentas necessárias para criar, compilar e executar projetos,
+incluindo o CLI e o compilador C# Roslyn. O Roslyn analisa o código-fonte
+e produz um assembly com IL e metadados. O CLR carrega esse assembly e gerencia
+a execução, incluindo a tradução JIT dos métodos e a coleta de memória.
+A Base Class Library (BCL) fornece tipos e funcionalidades reutilizáveis,
+como Console e Environment, usados pelo programa para saída e informações
+do ambiente. A implementação da biblioteca e do runtime para cada plataforma
+permite que essas APIs sejam usadas em sistemas operacionais diferentes.
+
+Ciclo de vida:
+1. Escrever ou editar o código-fonte em Program.cs.
+2. Executar dotnet build: o SDK usa o Roslyn para compilar C# em IL no assembly.
+3. Iniciar o programa: o runtime é escolhido e o CLR carrega o assembly.
+4. O JIT compila os métodos necessários de IL para código de máquina nativo.
+5. A CPU executa o código nativo, sob gerenciamento do runtime.
+
+Exercícios 4 a 8 — Projetos e validação
+
+CalculadoraTarifa: com 130 minutos, R$ 10,00 por hora e teto de R$ 50,00,
+a saída informa 2h 10min, R$ 30,00 e valor menor que o teto. O teto é
+apenas comparado ao valor calculado, conforme solicitado.
+
+ClassificadorPermanencia: os limites são até 120 minutos para rotativa curta,
+até 360 para rotativa padrão e acima de 360 para diária. No teste com 120,
+121, 360 e 361 minutos, seguido de -2, texto inválido e -1, os contadores
+foram 1, 2 e 1. As entradas inválidas e a sentinela não foram contabilizadas.
+
+MenuEstacionamento: foram testadas tarifa de 61 minutos (R$ 20,00), conversão
+de 125 minutos (2h 5min), as três categorias, Sobre e saída com contadores.
+Para executar qualquer projeto, entre em sua pasta e use dotnet run.
+
+A inspeção no depurador do Visual Studio solicitada no exercício 5 ainda precisa
+ser realizada: abra ClassificadorPermanencia.csproj no Visual Studio Community,
+coloque um breakpoint no primeiro if após a validação de totalMinutes, inicie
+a depuração, digite 120 e examine totalMinutes na janela de variáveis locais.
+Não foi registrada uma sessão de depuração que não aconteceu.
