@@ -1,0 +1,31 @@
+TP2 — Sistema de estacionamento
+Paulo Queiroz
+
+Normalização e resumo diário
+
+NormalizarPlaca aplica Trim() e ToUpper() antes de comparar a placa com o
+padrão Mercosul. PlacaValida confere o comprimento e verifica as letras e
+os dígitos nas posições esperadas. O resumo usa F2 e a cultura pt-BR para
+imprimir a média com duas casas decimais e vírgula como separador.
+
+Encapsulamento de Veiculo
+
+Manteria todos os campos privados. A placa, o horário de entrada e o tipo
+são definidos na criação do veículo e ficam disponíveis para consulta por
+propriedades públicas de leitura. Isso preserva os dados do registro de
+entrada. ValorPago permite leitura e escrita pela propriedade pública. O
+setter atualiza o campo privado somente com valores não negativos. Usei
+decimal para representar o valor em dinheiro com precisão decimal.
+
+Recibo de saída
+
+O record posicional gera propriedades que só podem ser definidas na
+inicialização, o que protege o recibo contra alterações acidentais que uma
+classe mutável permitiria. A placa e o valor pago são suficientes para
+registrar o pagamento, e o recibo conserva esses valores mesmo que o
+ValorPago do veículo seja atualizado depois.
+
+Execução
+
+Com o SDK do .NET 10, execute dotnet run na pasta do projeto. O programa
+imprime as demonstrações dos seis exercícios em uma única execução.
