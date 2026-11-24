@@ -1,0 +1,52 @@
+TP2 — Paulo Queiroz
+
+Como compilar e executar
+========================
+
+De dentro da pasta de cada exercício:
+
+  javac *.java
+  java <classe com main>
+
+Classe com main: ex01 LeitorPedido, ex02/ex04/ex05 ValidadorCodigo, ex03 ResumoDiario,
+ex06 a ex10 Main.
+
+
+Exercício 5
+===========
+
+A sobrecarga é válida porque o compilador distingue métodos pelo nome somado à lista de
+parâmetros (a assinatura): codigoValido(String) e codigoValido(String[]) recebem tipos
+diferentes, então cada chamada resolve para uma única versão. Um erro de compilação só
+ocorreria se duas versões tivessem a mesma lista de parâmetros, já que o tipo de retorno
+(boolean ou boolean[]) não faz parte da assinatura e não serve para diferenciá-las.
+
+
+Relatório técnico — decisões de design (Exercícios 6 a 10)
+==========================================================
+
+Encapsulamento: todos os atributos de Pedido são private. O código e o destino/endereço são
+final, pois não mudam depois que o pedido existe. Só o peso é alterável, e apenas pelo setter
+setWeight, que rejeita valores menores ou iguais a zero, mantém o valor anterior e devolve
+false. O construtor aplica a mesma regra (lança IllegalArgumentException), para que nenhum
+Pedido nasça com peso inválido. Assim a regra fica em um único lugar e nenhum outro código
+consegue corromper o peso.
+
+Construtores: o de três valores delega ao de quatro (com prioridade) usando PADRAO, e o de
+dois (código e peso) delega ao de três com um destino padrão, usando this(...) para não
+duplicar a lógica. O instante de criação (LocalDateTime) é registrado em um único construtor,
+que recebe todas as chamadas, e por isso vale para todos os pedidos. A representação textual
+fica em toString.
+
+Enum Prioridade: com URGENTE, PADRAO e LEVE o compilador impede valores inexistentes e erros
+de digitação, o que não acontece com Strings como "urgente" ou "padrão". Também permite
+comparar com == e usar switch com verificação de cobertura.
+
+Record DespachoPedido: guarda só código e prioridade final. O record é imutável por
+definição (componentes final), e já gera construtor, acessores, equals, hashCode e toString,
+o que serve bem para um registro compacto que não deve mudar depois de despachado.
+
+Composição e contador estático: Pedido tem um Endereco (relação "tem um"), em vez de um texto
+solto, o que separa rua e cidade e permite evoluir o endereço sem mexer em Pedido. O contador
+totalCreated é static porque pertence à classe, não a cada objeto: é incrementado em todo
+construtor, só é lido por Pedido.getTotalCreated() e nenhum pedido precisa conhecer os outros.
